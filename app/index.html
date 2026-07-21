@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Just Go · App do Visitante — Festival Canaã Cidade Junina</title>
+  <meta name="description" content="App oficial do visitante · Festival Canaã Cidade Junina, powered by Just Go." />
+  <meta name="theme-color" content="#07090d" />
+  <link rel="icon" href="../assets/logo-justgo.avif" type="image/avif" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- ══════════ SPLASH ══════════ -->
+  <div class="splash" id="splash">
+    <div class="splash-logo">
+      <svg class="logo-mark lg" viewBox="0 -10 260 275" aria-label="Just Go">
+        <text x="145" y="95" text-anchor="middle" class="logo-just">Just</text>
+        <g class="logo-go">
+          <!-- G : arco quase completo com abertura à direita -->
+          <path d="M 150.7 169.7 A 50 50 0 1 0 150.7 210.3" fill="none" stroke="var(--logo-blue)" stroke-width="26" stroke-linecap="round"/>
+          <!-- barra do G que atravessa para o loop do "o" -->
+          <path d="M 128 190 H 175" fill="none" stroke="var(--logo-blue)" stroke-width="26" stroke-linecap="round"/>
+          <!-- o : loop infinito à direita -->
+          <path d="M 175 190 A 30 30 0 1 1 205 220" fill="none" stroke="var(--logo-blue)" stroke-width="26" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <div class="splash-ring"></div>
+    </div>
+    <p class="splash-tag">Seu evento. Mais inteligente.</p>
+    <div class="splash-event">🎪 Festival Canaã Cidade Junina</div>
+  </div>
+
+  <!-- ══════════ STATUS BAR + HEADER ══════════ -->
+  <div class="statusbar"><span id="clock">21:34</span><span class="sb-icons">📶 🔋</span></div>
+
+  <header class="app-header">
+    <svg class="logo-mark sm" viewBox="0 -12 310 137" aria-label="Just Go">
+      <text x="0" y="80" class="logo-just-inline">Just</text>
+      <g transform="translate(175,0)">
+        <path d="M 68.3 42.4 A 31 31 0 1 0 68.3 67.6" fill="none" stroke="var(--logo-blue)" stroke-width="16" stroke-linecap="round"/>
+        <path d="M 54 55 H 84" fill="none" stroke="var(--logo-blue)" stroke-width="16" stroke-linecap="round"/>
+        <path d="M 83 55 A 19 19 0 1 1 102 74" fill="none" stroke="var(--logo-blue)" stroke-width="16" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <div class="header-right">
+      <button class="icon-btn" id="btnSearch" aria-label="Buscar">🔍</button>
+      <button class="icon-btn has-dot" id="btnBell" aria-label="Notificações">🔔</button>
+    </div>
+  </header>
+
+  <!-- ══════════ TELAS ══════════ -->
+  <main class="screens" id="screens"><!-- renderizado via JS --></main>
+
+  <!-- ══════════ BOTTOM NAV ══════════ -->
+  <nav class="bottomnav" id="bottomnav">
+    <button data-go="home" class="active"><i>🏠</i><span>Início</span></button>
+    <button data-go="agenda"><i>📅</i><span>Agenda</span></button>
+    <button data-go="ia" class="nav-ai" aria-label="Go AI"><b>AI</b></button>
+    <button data-go="mapa"><i>🗺️</i><span>Mapa</span></button>
+    <button data-go="perfil"><i>👤</i><span>Perfil</span></button>
+  </nav>
+
+  <!-- ══════════ MODAL EMERGÊNCIA ══════════ -->
+  <div class="modal" id="modalSos" hidden>
+    <div class="modal-card">
+      <div class="sos-pulse">🚑</div>
+      <h3>Emergência</h3>
+      <p>Sua localização será enviada à equipe médica mais próxima do seu setor.</p>
+      <button class="btn-gold btn-block" id="sosConfirm">Chamar equipe agora</button>
+      <button class="btn-outline btn-block" data-close>Cancelar</button>
+    </div>
+  </div>
+
+  <!-- ══════════ TOAST ══════════ -->
+  <div class="toast" id="toast" hidden></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

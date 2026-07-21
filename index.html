@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just Go — Plataforma de Event Intelligence</title>
+  <meta name="description" content="A Just Go transforma eventos em inteligência para decisão: aplicativo do visitante, pesquisas em campo, dashboards em tempo real, IA e relatórios executivos." />
+  <meta property="og:title" content="Just Go — Event Intelligence" />
+  <meta property="og:description" content="Seu evento. Mais inteligente. Mais conectado. Mais rentável." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563EB'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>JG</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══════════ NAVBAR ══════════ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand">
+        <span class="brand-mark">JG</span>
+        <span class="brand-name">Just&nbsp;Go</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#plataforma">Plataforma</a>
+        <a href="#app-demo">App Demo</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#go-ai">Go AI</a>
+        <a href="#analytics">Analytics</a>
+        <a href="#caso">Caso Canaã</a>
+      </nav>
+      <a href="#contato" class="btn btn-primary btn-sm nav-cta">Agendar Demonstração</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero" id="inicio">
+    <div class="hero-glow"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="badge reveal">⚡ Plataforma de Smart Events</div>
+        <h1 class="hero-title">
+          <span class="reveal d1">Seu evento.</span>
+          <span class="reveal d2 grad-text">Mais inteligente.</span>
+          <span class="reveal d3">Mais conectado.</span>
+          <span class="reveal d4">Mais rentável.</span>
+        </h1>
+        <p class="hero-sub reveal d5">
+          Gerencie visitantes, expositores, pesquisas, mapas, programação e
+          indicadores em uma única plataforma — com dados em tempo real.
+        </p>
+        <div class="hero-actions reveal d6">
+          <a href="#app-demo" class="btn btn-primary">Explorar Demo</a>
+          <a href="#contato" class="btn btn-ghost">Agendar Demonstração</a>
+        </div>
+        <div class="hero-proof reveal d7">
+          <div><strong data-count="1647">0</strong><span>entrevistas digitais</span></div>
+          <div><strong>R$&nbsp;8,2&nbsp;mi</strong><span>impacto medido</span></div>
+          <div><strong data-count="94" data-suffix="%">0</strong><span>satisfação</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal d3">
+        <div class="float-card fc-1">
+          <span class="fc-dot"></span>
+          <div><small>Visitantes online</small><strong id="heroLive">5.843</strong></div>
+        </div>
+        <div class="float-card fc-2">
+          <small>Satisfação</small>
+          <div class="fc-bar"><i style="width:94%"></i></div>
+          <strong>94%</strong>
+        </div>
+        <!-- Phone preview (estático no hero; o funcional fica na seção demo) -->
+        <div class="phone phone-hero">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ps-header">
+              <small>Boa noite 👋</small>
+              <h4>Festival Canaã<br/>Cidade Junina</h4>
+            </div>
+            <div class="ps-now">
+              <span class="live-pill">● AO VIVO</span>
+              <strong>Forró da Lua</strong>
+              <small>Palco Principal · 21h00</small>
+            </div>
+            <div class="ps-tiles">
+              <div>🎤<span>Shows</span></div>
+              <div>🗺️<span>Mapa</span></div>
+              <div>🍔<span>Comida</span></div>
+              <div>🎫<span>QR&nbsp;Code</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ECOSSISTEMA / CONEXÃO ══════════ -->
+  <section class="section" id="plataforma">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">A plataforma</span>
+        <h2>Muito mais que um aplicativo.</h2>
+        <p>A Just Go conecta todos os participantes do evento em um único ecossistema.</p>
+      </div>
+      <div class="eco-diagram reveal">
+        <div class="eco-node eco-top">🏛️ Prefeitura / Organizador</div>
+        <div class="eco-line-v"></div>
+        <div class="eco-row">
+          <div class="eco-node">🧍 Visitantes</div>
+          <div class="eco-node">🛍️ Expositores</div>
+          <div class="eco-node">🎪 Produção</div>
+        </div>
+        <div class="eco-line-v"></div>
+        <div class="eco-node eco-cloud">☁️ JUST GO CLOUD</div>
+        <div class="eco-line-v"></div>
+        <div class="eco-node eco-out">IA · Dashboards · Analytics · Pesquisas</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ APP DEMO ══════════ -->
+  <section class="section section-alt" id="app-demo">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Demo interativa</span>
+        <h2>Aplicativo do Visitante</h2>
+        <p>Navegue pelo aplicativo simulado do Festival Canaã Cidade Junina. Toque nos menus, favorite barracas e explore o mapa.</p>
+        <a href="app/" class="btn btn-ghost btn-sm" style="margin-top:18px">📱 Abrir o app completo em tela cheia →</a>
+      </div>
+
+      <div class="appdemo-grid">
+        <div class="phone phone-demo reveal">
+          <div class="phone-notch"></div>
+          <div class="phone-screen" id="appScreen"><!-- telas renderizadas via JS --></div>
+          <nav class="phone-tabbar" id="appTabbar">
+            <button data-screen="home" class="active">🏠<span>Home</span></button>
+            <button data-screen="agenda">📅<span>Agenda</span></button>
+            <button data-screen="mapa">🗺️<span>Mapa</span></button>
+            <button data-screen="comida">🍔<span>Comida</span></button>
+            <button data-screen="expo">🛍️<span>Expo</span></button>
+          </nav>
+        </div>
+
+        <div class="feature-grid reveal">
+          <div class="feature-card">🎤<strong>Programação</strong><span>Shows e horários em tempo real</span></div>
+          <div class="feature-card">🗺️<strong>Mapa</strong><span>Localize palcos, serviços e barracas</span></div>
+          <div class="feature-card">🍔<strong>Gastronomia</strong><span>Cardápios, preços e avaliações</span></div>
+          <div class="feature-card">🛍️<strong>Expositores</strong><span>Catálogo completo por setor</span></div>
+          <div class="feature-card">⭐<strong>Favoritos</strong><span>Monte seu roteiro do evento</span></div>
+          <div class="feature-card">📍<strong>Navegação</strong><span>Rotas dentro do evento</span></div>
+          <div class="feature-card">🎫<strong>QR Code</strong><span>Acesso e vantagens exclusivas</span></div>
+          <div class="feature-card">🚑<strong>Emergência</strong><span>Ajuda a um toque de distância</span></div>
+          <div class="feature-card">❤️<strong>Avaliações</strong><span>Feedback que vira indicador</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ DASHBOARD TEMPO REAL ══════════ -->
+  <section class="section" id="dashboard">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Centro de comando</span>
+        <h2>Tudo em tempo real.</h2>
+        <p>Enquanto o evento acontece, a organização enxerga tudo: público, fluxo, economia e satisfação.</p>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-card reveal">
+          <div class="dash-label">📊 Visitantes online</div>
+          <div class="dash-value"><span id="dashVisitors">5.843</span></div>
+          <svg class="spark" id="sparkVisitors" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <small class="dash-note up" id="dashTrend">▲ atualizando ao vivo</small>
+        </div>
+        <div class="dash-card reveal d1">
+          <div class="dash-label">📍 Mapa de calor</div>
+          <div class="heatmap" id="heatmap" role="img" aria-label="Mapa de calor de ocupação por setor"></div>
+          <small class="dash-note">Ocupação por setor · atualização em tempo real</small>
+        </div>
+        <div class="dash-card reveal d2">
+          <div class="dash-label">💰 Impacto econômico</div>
+          <div class="dash-value">R$&nbsp;<span data-count="8.2" data-decimals="1">0</span>&nbsp;mi</div>
+          <div class="fc-bar big"><i style="width:82%"></i></div>
+          <small class="dash-note">Estimativa acumulada do evento</small>
+        </div>
+        <div class="dash-card reveal d3">
+          <div class="dash-label">😊 Satisfação</div>
+          <div class="ring" style="--pct:94"><span>94%</span></div>
+          <small class="dash-note">CSAT geral dos visitantes</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PESQUISAS ══════════ -->
+  <section class="section section-alt" id="pesquisas">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Go Survey</span>
+        <h2>Pesquisas inteligentes.</h2>
+        <p>Do questionário ao relatório executivo — 100% digital, mesmo sem internet no campo.</p>
+      </div>
+      <div class="flow reveal">
+        <div class="flow-step">📝<strong>Questionário</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">📲<strong>Coleta Offline</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">🔄<strong>Sincronização</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">📊<strong>Dashboard</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">📄<strong>Relatório</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">🤖<strong>IA</strong></div>
+      </div>
+      <p class="quote reveal">
+        A mesma tecnologia utilizada na pesquisa do <strong>Festival Canaã Cidade Junina</strong>
+        pode ser aplicada em qualquer evento, cidade ou pesquisa institucional.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════ PARA QUEM ══════════ -->
+  <section class="section" id="segmentos">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Segmentos</span>
+        <h2>Para quem?</h2>
+      </div>
+      <div class="seg-grid reveal">
+        <div class="seg-card">🏛️<span>Prefeituras</span></div>
+        <div class="seg-card">🎪<span>Eventos</span></div>
+        <div class="seg-card">🎤<span>Festivais</span></div>
+        <div class="seg-card">🏟️<span>Arenas</span></div>
+        <div class="seg-card">🏬<span>Feiras</span></div>
+        <div class="seg-card">🛒<span>Exposições</span></div>
+        <div class="seg-card">🎓<span>Congressos</span></div>
+        <div class="seg-card">🏖️<span>Turismo</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ GO AI ══════════ -->
+  <section class="section section-alt" id="go-ai">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Go AI</span>
+        <h2>Inteligência Artificial no evento.</h2>
+        <p>Experimente: pergunte algo que um visitante perguntaria. A demo responde com dados simulados do festival.</p>
+      </div>
+      <div class="chat reveal" aria-live="polite">
+        <div class="chat-header">
+          <span class="chat-avatar">🤖</span>
+          <div><strong>Go AI</strong><small>Assistente do Festival · online</small></div>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="msg bot">Olá! 👋 Sou a Go AI. Posso ajudar com shows, comida, banheiros, estacionamento e muito mais. Pergunte algo!</div>
+        </div>
+        <div class="chat-chips" id="chatChips">
+          <button>Qual show começa agora?</button>
+          <button>Onde está o banheiro mais próximo?</button>
+          <button>Qual barraca vende comida vegetariana?</button>
+          <button>Qual estacionamento está mais vazio?</button>
+        </div>
+        <form class="chat-input" id="chatForm">
+          <input type="text" id="chatText" placeholder="Digite sua pergunta…" autocomplete="off" />
+          <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ANALYTICS ══════════ -->
+  <section class="section" id="analytics">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Go Analytics</span>
+        <h2>Plataforma de Analytics.</h2>
+        <p>KPIs, fluxo, origem do público e satisfação — os números que sustentam a prestação de contas.</p>
+      </div>
+
+      <div class="kpi-row reveal">
+        <div class="kpi"><small>Visitantes (evento)</small><strong data-count="58" data-suffix=" mil">0</strong></div>
+        <div class="kpi"><small>Tempo médio</small><strong>3h40</strong></div>
+        <div class="kpi"><small>NPS</small><strong data-count="72">0</strong></div>
+        <div class="kpi"><small>CSAT</small><strong data-count="94" data-suffix="%">0</strong></div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card reveal">
+          <div class="chart-head">
+            <h3>Fluxo de visitantes por hora</h3>
+            <div class="filter-row" id="flowFilters">
+              <button data-day="sex">Sex</button>
+              <button data-day="sab" class="active">Sáb</button>
+              <button data-day="dom">Dom</button>
+            </div>
+          </div>
+          <div class="chart-wrap"><svg id="flowChart" viewBox="0 0 560 260" role="img" aria-label="Gráfico de linha do fluxo de visitantes por hora"></svg></div>
+        </div>
+        <div class="chart-card reveal d1">
+          <div class="chart-head"><h3>Origem dos visitantes</h3></div>
+          <div class="chart-wrap"><svg id="originChart" viewBox="0 0 560 260" role="img" aria-label="Gráfico de barras da origem dos visitantes"></svg></div>
+        </div>
+      </div>
+      <div class="chart-tooltip" id="chartTip" hidden></div>
+    </div>
+  </section>
+
+  <!-- ══════════ NÚMEROS ══════════ -->
+  <section class="section section-dark" id="resultados">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow light">Resultados reais</span>
+        <h2>Números da pesquisa Canaã.</h2>
+      </div>
+      <div class="num-grid">
+        <div class="num reveal"><strong data-count="530">0</strong><span>Visitantes entrevistados</span></div>
+        <div class="num reveal d1"><strong data-count="413">0</strong><span>Moradores</span></div>
+        <div class="num reveal d2"><strong data-count="253">0</strong><span>Comerciantes</span></div>
+        <div class="num reveal d3"><strong data-count="118">0</strong><span>Expositores</span></div>
+        <div class="num reveal d4"><strong data-count="1647">0</strong><span>Entrevistas</span></div>
+        <div class="num reveal d5"><strong data-count="100" data-suffix="%">0</strong><span>Digital</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CASO DE SUCESSO ══════════ -->
+  <section class="section" id="caso">
+    <div class="container case-grid">
+      <div class="case-visual reveal">
+        <div class="case-photo">
+          <span>🎪</span>
+          <em>Festival Canaã Cidade Junina — vista aérea</em>
+        </div>
+      </div>
+      <div class="case-copy reveal d1">
+        <span class="eyebrow">Caso de sucesso</span>
+        <h2>Festival Canaã<br/>Cidade Junina</h2>
+        <p>Pesquisa de percepção e impacto econômico conduzida integralmente pela plataforma Just Go, com coleta digital em campo e relatórios executivos automáticos.</p>
+        <ul class="check-list">
+          <li>Pesquisa 100% digital</li>
+          <li>Dashboard em tempo real</li>
+          <li>Indicadores de público e fluxo</li>
+          <li>Relatórios automáticos</li>
+          <li>Índices de satisfação (NPS · CSAT)</li>
+          <li>Medição de impacto econômico</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ECOSSISTEMA DE PRODUTOS ══════════ -->
+  <section class="section section-alt" id="ecossistema">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Ecossistema Just Go</span>
+        <h2>Uma plataforma, seis produtos.</h2>
+      </div>
+      <div class="prod-grid reveal">
+        <div class="prod-card"><span>📱</span><strong>Go Event</strong><p>Aplicativo oficial do evento</p></div>
+        <div class="prod-card"><span>📝</span><strong>Go Survey</strong><p>Pesquisas digitais offline-first</p></div>
+        <div class="prod-card"><span>📊</span><strong>Go Analytics</strong><p>Dashboards e KPIs em tempo real</p></div>
+        <div class="prod-card"><span>🤖</span><strong>Go AI</strong><p>Assistente inteligente do visitante</p></div>
+        <div class="prod-card"><span>🛍️</span><strong>Go Expo</strong><p>Gestão completa de expositores</p></div>
+        <div class="prod-card"><span>🏖️</span><strong>Go Tourism</strong><p>Indicadores turísticos da cidade</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CTA FINAL / CONTATO ══════════ -->
+  <section class="section cta-final" id="contato">
+    <div class="container cta-grid">
+      <div class="reveal">
+        <h2>Vamos transformar seu evento<br/><span class="grad-text">em dados inteligentes.</span></h2>
+        <p>Agende uma demonstração e veja a plataforma funcionando com os dados do seu evento.</p>
+        <div class="cta-contacts">
+          <span>✉️ contato@justgosmartaccess.com.br</span>
+          <span>📍 Brasil · atendimento nacional</span>
+        </div>
+      </div>
+      <form class="lead-form reveal d1" id="leadForm">
+        <label>Nome<input type="text" name="nome" required placeholder="Seu nome" /></label>
+        <label>E-mail<input type="email" name="email" required placeholder="voce@empresa.com.br" /></label>
+        <label>Evento / Instituição<input type="text" name="evento" placeholder="Ex.: Festival da cidade, prefeitura…" /></label>
+        <button type="submit" class="btn btn-primary btn-block">Agendar Demonstração</button>
+        <p class="form-ok" id="formOk" hidden>✅ Recebido! Entraremos em contato em breve. <em>(demo — nenhum dado foi enviado)</em></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">
+        <span class="brand-mark">JG</span>
+        <span class="brand-name">Just&nbsp;Go</span>
+      </div>
+      <nav>
+        <a href="https://github.com/danielsmartaccess" target="_blank" rel="noopener">GitHub</a>
+        <a href="#contato">Contato</a>
+        <a href="#inicio">Topo ↑</a>
+      </nav>
+      <small>© 2026 Just Go Smart Access · Event Intelligence. Demo de produto — dados ilustrativos baseados na pesquisa do Festival Canaã Cidade Junina.</small>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
