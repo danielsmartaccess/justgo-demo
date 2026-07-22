@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just Go · Go Survey — Construtor de Pesquisas e Coleta em Campo</title>
+  <meta name="description" content="Go Survey: construtor de questionários com cotas e lógica de pulo, e aplicativo de coleta em campo com modo offline, painel de cotas e sincronização." />
+  <meta name="theme-color" content="#060E16" />
+  <link rel="icon" href="../assets/logo-justgo.avif" type="image/avif" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="survey.css?v=1" />
+</head>
+<body>
+
+<!-- ══════════ SPRITE DE ÍCONES ══════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></symbol>
+    <symbol id="i-check-square" viewBox="0 0 24 24"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M3 12h.01M3 18h.01M3 6h.01M8 12h13M8 18h13M8 6h13"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></symbol>
+    <symbol id="i-hash" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.86a10 10 0 0 1 14 0"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/></symbol>
+    <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M12 20h.01"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/><path d="M5 12.86a10 10 0 0 1 5.17-2.69"/><path d="M19 12.86a10 10 0 0 0-2.01-1.52"/><path d="M2 8.82a15 15 0 0 1 4.18-2.64"/><path d="M22 8.82a15 15 0 0 0-11.29-3.76"/><path d="m2 2 20 20"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-warning" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+    <symbol id="i-smartphone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+  </defs>
+</svg>
+
+<!-- ══════════════════════════════════════════════════
+     ALTERNADOR DE EXPERIÊNCIA
+     ══════════════════════════════════════════════════ -->
+<header class="switch-bar">
+  <div class="sb-left">
+    <a class="back-link" href="../" title="Voltar ao site">
+      <svg class="ic ic-13"><use href="#i-arrow-left"/></svg><span>Voltar</span>
+    </a>
+    <span class="sb-div"></span>
+    <span class="brand-mark"><svg class="ic ic-12"><use href="#i-chart"/></svg></span>
+    <span class="brand-name">Go<i>Survey</i></span>
+    <span class="brand-sub">Just Go Intelligence Platform</span>
+  </div>
+
+  <div class="exp-seg" id="expToggle" role="group" aria-label="Alternar experiência">
+    <button type="button" data-exp="builder" class="active" aria-pressed="true">
+      <svg class="ic ic-12"><use href="#i-monitor"/></svg><b>Survey Builder</b><i> · Desktop 1440px</i>
+    </button>
+    <button type="button" data-exp="field" aria-pressed="false">
+      <svg class="ic ic-12"><use href="#i-smartphone"/></svg><b>Coleta em Campo</b><i> · Mobile 390px</i>
+    </button>
+  </div>
+
+  <div class="sb-lang">Português Brasileiro</div>
+</header>
+
+<!-- ══════════════════════════════════════════════════
+     SUPERFÍCIE 1 — SURVEY BUILDER (desktop)
+     ══════════════════════════════════════════════════ -->
+<section class="surface builder" id="surfBuilder" aria-label="Survey Builder">
+
+  <!-- ── Barra superior do construtor ── -->
+  <header class="bld-top">
+    <div class="blogo">
+      <span class="blogo-mark"><svg class="ic ic-14"><use href="#i-chart"/></svg></span>
+      <span class="blogo-name">Go<i>Survey</i></span>
+    </div>
+
+    <span class="bld-div"></span>
+
+    <div class="bld-title">
+      <input type="text" value="Pesquisa de Satisfação — Festival Canaã 2027" aria-label="Título da pesquisa" />
+    </div>
+
+    <div class="autosave">
+      <svg class="ic ic-12"><use href="#i-save"/></svg>
+      <span>Rascunho salvo · 14:32</span>
+    </div>
+
+    <span class="bld-div"></span>
+
+    <button type="button" class="btn-preview">
+      <svg class="ic ic-14"><use href="#i-eye"/></svg><span>Prévia</span>
+    </button>
+
+    <button type="button" class="icon-btn" aria-label="Configurações da pesquisa">
+      <svg class="ic ic-16"><use href="#i-settings"/></svg>
+    </button>
+  </header>
+
+  <div class="bld-body">
+
+    <!-- ── ESQUERDA: paleta de tipos de pergunta ── -->
+    <aside class="bld-left">
+      <div class="bl-inner">
+        <p class="kicker">Tipos de Pergunta</p>
+        <div class="qt-list">
+          <button type="button" class="qt">
+            <span class="qt-ico" style="background:#00AEEF18;color:#00AEEF"><svg class="ic ic-14"><use href="#i-check-square"/></svg></span>
+            <span class="qt-label">Escolha única</span>
+          </button>
+          <button type="button" class="qt">
+            <span class="qt-ico" style="background:#5B6EF518;color:#5B6EF5"><svg class="ic ic-14"><use href="#i-list"/></svg></span>
+            <span class="qt-label">Múltipla escolha</span>
+          </button>
+          <button type="button" class="qt">
+            <span class="qt-ico" style="background:#34C98E18;color:#34C98E"><svg class="ic ic-14"><use href="#i-chart"/></svg></span>
+            <span class="qt-label">Escala 0–10</span>
+          </button>
+          <button type="button" class="qt">
+            <span class="qt-ico" style="background:#F5A62318;color:#F5A623"><svg class="ic ic-14"><use href="#i-star"/></svg></span>
+            <span class="qt-label">NPS</span>
+          </button>
+          <button type="button" class="qt">
+            <span class="qt-ico" style="background:#8B5CF618;color:#8B5CF6"><svg class="ic ic-14"><use href="#i-type"/></svg></span>
+            <span class="qt-label">Texto livre</span>
+          </button>
+          <button type="button" class="qt">
+            <span class="qt-ico" style="background:#EC489918;color:#EC4899"><svg class="ic ic-14"><use href="#i-hash"/></svg></span>
+            <span class="qt-label">Número</span>
+          </button>
+          <button type="button" class="qt">
+            <span class="qt-ico" style="background:#14B8A618;color:#14B8A6"><svg class="ic ic-14"><use href="#i-calendar"/></svg></span>
+            <span class="qt-label">Data</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="bl-foot">
+        <div class="palette-hint"><p>Arraste um tipo para o canvas</p></div>
+      </div>
+    </aside>
+
+    <!-- ── CENTRO: canvas de perguntas ── -->
+    <main class="bld-canvas">
+      <div class="canvas-inner">
+
+        <div class="canvas-head">
+          <p class="kicker kicker-lg">4 perguntas</p>
+          <button type="button" class="link-btn"><svg class="ic ic-14"><use href="#i-plus"/></svg>Adicionar pergunta</button>
+        </div>
+
+        <!-- P1 -->
+        <article class="qcard" data-q="P1">
+          <div class="qc-head" role="button" tabindex="0" aria-expanded="false" aria-controls="body-P1">
+            <span class="qc-grip" aria-hidden="true"><svg class="ic ic-16"><use href="#i-grip"/></svg></span>
+            <span class="qc-id">P1</span>
+            <span class="qc-type" style="background:#00AEEF18;color:#00AEEF">Escolha única</span>
+            <p class="qc-text">Qual é o seu grau de satisfação geral com o Festival Canaã 2027?</p>
+            <span class="qc-toggle"><svg class="ic ic-16"><use href="#i-chevron-down"/></svg></span>
+          </div>
+          <div class="qc-body" id="body-P1" hidden>
+            <div class="fld-group">
+              <label class="fld-label" for="txt-P1">Texto da pergunta</label>
+              <textarea id="txt-P1" class="fld" rows="2">Qual é o seu grau de satisfação geral com o Festival Canaã 2027?</textarea>
+            </div>
+            <div class="fld-group">
+              <span class="fld-label">Opções de resposta</span>
+              <div class="opt-list">
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Muito satisfeito" aria-label="Opção 1" /><button type="button" class="opt-del" aria-label="Remover opção Muito satisfeito"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Satisfeito" aria-label="Opção 2" /><button type="button" class="opt-del" aria-label="Remover opção Satisfeito"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Neutro" aria-label="Opção 3" /><button type="button" class="opt-del" aria-label="Remover opção Neutro"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Insatisfeito" aria-label="Opção 4" /><button type="button" class="opt-del" aria-label="Remover opção Insatisfeito"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Muito insatisfeito" aria-label="Opção 5" /><button type="button" class="opt-del" aria-label="Remover opção Muito insatisfeito"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <button type="button" class="add-opt"><svg class="ic ic-12"><use href="#i-plus"/></svg> Adicionar opção</button>
+              </div>
+            </div>
+            <div class="qc-foot">
+              <button type="button" class="foot-link"><svg class="ic ic-12"><use href="#i-plus"/></svg> Lógica de pulo</button>
+              <button type="button" class="foot-del">Excluir</button>
+              <button type="button" class="foot-save">Salvar</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- P2 -->
+        <article class="qcard" data-q="P2">
+          <div class="qc-head" role="button" tabindex="0" aria-expanded="false" aria-controls="body-P2">
+            <span class="qc-grip" aria-hidden="true"><svg class="ic ic-16"><use href="#i-grip"/></svg></span>
+            <span class="qc-id">P2</span>
+            <span class="qc-type" style="background:#F5A62318;color:#F5A623">NPS</span>
+            <p class="qc-text">Em uma escala de 0 a 10, qual a probabilidade de você recomendar o Festival Canaã a um amigo?</p>
+            <span class="qc-toggle"><svg class="ic ic-16"><use href="#i-chevron-down"/></svg></span>
+          </div>
+          <div class="qc-body" id="body-P2" hidden>
+            <div class="fld-group">
+              <label class="fld-label" for="txt-P2">Texto da pergunta</label>
+              <textarea id="txt-P2" class="fld" rows="2">Em uma escala de 0 a 10, qual a probabilidade de você recomendar o Festival Canaã a um amigo?</textarea>
+            </div>
+            <div class="qc-foot">
+              <button type="button" class="foot-link"><svg class="ic ic-12"><use href="#i-plus"/></svg> Lógica de pulo</button>
+              <button type="button" class="foot-del">Excluir</button>
+              <button type="button" class="foot-save">Salvar</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- P3 — expandida por padrão -->
+        <article class="qcard is-open" data-q="P3">
+          <div class="qc-head" role="button" tabindex="0" aria-expanded="true" aria-controls="body-P3">
+            <span class="qc-grip" aria-hidden="true"><svg class="ic ic-16"><use href="#i-grip"/></svg></span>
+            <span class="qc-id">P3</span>
+            <span class="qc-type" style="background:#00AEEF18;color:#00AEEF">Escolha única</span>
+            <p class="qc-text">Você já participou de edições anteriores do Festival Canaã?</p>
+            <span class="qc-toggle"><svg class="ic ic-16"><use href="#i-chevron-up"/></svg></span>
+          </div>
+          <div class="qc-body" id="body-P3">
+            <div class="fld-group">
+              <label class="fld-label" for="txt-P3">Texto da pergunta</label>
+              <textarea id="txt-P3" class="fld" rows="2">Você já participou de edições anteriores do Festival Canaã?</textarea>
+            </div>
+            <div class="fld-group">
+              <span class="fld-label">Opções de resposta</span>
+              <div class="opt-list">
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Sim" aria-label="Opção 1" /><button type="button" class="opt-del" aria-label="Remover opção Sim"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Não" aria-label="Opção 2" /><button type="button" class="opt-del" aria-label="Remover opção Não"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <button type="button" class="add-opt"><svg class="ic ic-12"><use href="#i-plus"/></svg> Adicionar opção</button>
+              </div>
+            </div>
+            <div class="skip">
+              <svg class="ic ic-14 skip-arrow"><use href="#i-arrow-right"/></svg>
+              <div>
+                <p class="skip-k">Lógica de pulo</p>
+                <p class="skip-t">Se resposta = "Não" → pular para P7</p>
+              </div>
+              <button type="button" class="skip-cfg" aria-label="Configurar lógica de pulo"><svg class="ic ic-13"><use href="#i-settings"/></svg></button>
+            </div>
+            <div class="qc-foot">
+              <button type="button" class="foot-link"><svg class="ic ic-12"><use href="#i-plus"/></svg> Lógica de pulo</button>
+              <button type="button" class="foot-del">Excluir</button>
+              <button type="button" class="foot-save">Salvar</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- P4 -->
+        <article class="qcard" data-q="P4">
+          <div class="qc-head" role="button" tabindex="0" aria-expanded="false" aria-controls="body-P4">
+            <span class="qc-grip" aria-hidden="true"><svg class="ic ic-16"><use href="#i-grip"/></svg></span>
+            <span class="qc-id">P4</span>
+            <span class="qc-type" style="background:#5B6EF518;color:#5B6EF5">Múltipla escolha</span>
+            <p class="qc-text">Quais atrações do festival você mais apreciou nesta edição?</p>
+            <span class="qc-toggle"><svg class="ic ic-16"><use href="#i-chevron-down"/></svg></span>
+          </div>
+          <div class="qc-body" id="body-P4" hidden>
+            <div class="fld-group">
+              <label class="fld-label" for="txt-P4">Texto da pergunta</label>
+              <textarea id="txt-P4" class="fld" rows="2">Quais atrações do festival você mais apreciou nesta edição?</textarea>
+            </div>
+            <div class="fld-group">
+              <span class="fld-label">Opções de resposta</span>
+              <div class="opt-list">
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Shows musicais" aria-label="Opção 1" /><button type="button" class="opt-del" aria-label="Remover opção Shows musicais"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Gastronomia" aria-label="Opção 2" /><button type="button" class="opt-del" aria-label="Remover opção Gastronomia"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Exposições culturais" aria-label="Opção 3" /><button type="button" class="opt-del" aria-label="Remover opção Exposições culturais"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <div class="opt-row"><span class="opt-dot"></span><input type="text" value="Atividades esportivas" aria-label="Opção 4" /><button type="button" class="opt-del" aria-label="Remover opção Atividades esportivas"><svg class="ic ic-14"><use href="#i-x"/></svg></button></div>
+                <button type="button" class="add-opt"><svg class="ic ic-12"><use href="#i-plus"/></svg> Adicionar opção</button>
+              </div>
+            </div>
+            <div class="qc-foot">
+              <button type="button" class="foot-link"><svg class="ic ic-12"><use href="#i-plus"/></svg> Lógica de pulo</button>
+              <button type="button" class="foot-del">Excluir</button>
+              <button type="button" class="foot-save">Salvar</button>
+            </div>
+          </div>
+        </article>
+
+        <button type="button" class="add-q"><svg class="ic ic-16"><use href="#i-plus"/></svg> Adicionar pergunta</button>
+      </div>
+    </main>
+
+    <!-- ── DIREITA: configurações e cotas ── -->
+    <aside class="bld-right">
+      <div class="br-inner">
+        <p class="kicker">Configurações e Cotas</p>
+
+        <!-- Resumo da pesquisa -->
+        <div class="info-box">
+          <div class="info-row"><span>Perguntas</span><b>12</b></div>
+          <div class="info-row"><span>Meta de coleta</span><b>400 ent.</b></div>
+          <div class="info-row"><span>Prazo</span><b>30/07/2027</b></div>
+        </div>
+
+        <!-- Cota: sexo -->
+        <div class="quota-block">
+          <div class="quota-head">
+            <span class="quota-name">Sexo</span>
+            <span class="quota-meta">50 / 50</span>
+          </div>
+          <div class="sex-bars">
+            <div class="bar"><i style="width:50%;background:#00AEEF"></i></div>
+            <div class="bar"><i style="width:50%;background:#8B5CF6"></i></div>
+          </div>
+          <div class="sex-legend">
+            <span><i style="background:#00AEEF"></i>Masculino <b>200</b></span>
+            <span><i style="background:#8B5CF6"></i>Feminino <b>200</b></span>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <!-- Cota: faixa etária -->
+        <div class="quota-block">
+          <div class="quota-head mb12">
+            <span class="quota-name">Faixa etária</span>
+            <button type="button" class="quota-edit">Editar</button>
+          </div>
+          <div class="age-row">
+            <div class="age-top"><span class="age-label">18–24 anos</span><span class="age-val">68/80</span></div>
+            <div class="bar"><i style="width:85%;background:#34C98E"></i></div>
+          </div>
+          <div class="age-row">
+            <div class="age-top"><span class="age-label">25–34 anos</span><span class="age-val">91/100</span></div>
+            <div class="bar"><i style="width:91%;background:#34C98E"></i></div>
+          </div>
+          <div class="age-row">
+            <div class="age-top"><span class="age-label">35–49 anos</span><span class="age-val">74/120</span></div>
+            <div class="bar"><i style="width:62%;background:#00AEEF"></i></div>
+          </div>
+          <div class="age-row">
+            <div class="age-top"><span class="age-label">50–64 anos</span><span class="age-val">29/80</span></div>
+            <div class="bar"><i style="width:36%;background:#F5A623"></i></div>
+          </div>
+          <div class="age-row">
+            <div class="age-top"><span class="age-label">65+ anos</span><span class="age-val">7/20</span></div>
+            <div class="bar"><i style="width:35%;background:#F5A623"></i></div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <!-- Interruptores -->
+        <div class="settings-list">
+          <div class="setting-row">
+            <span class="setting-label" id="lbl-anon">Resposta anônima</span>
+            <button type="button" class="tgl on" role="switch" aria-checked="true" aria-labelledby="lbl-anon"><i></i></button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label" id="lbl-capi">Modo CAPI</span>
+            <button type="button" class="tgl on" role="switch" aria-checked="true" aria-labelledby="lbl-capi"><i></i></button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label" id="lbl-geo">Geolocalização</span>
+            <button type="button" class="tgl" role="switch" aria-checked="false" aria-labelledby="lbl-geo"><i></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="br-foot">
+        <button type="button" class="publish">Publicar pesquisa <svg class="ic ic-15"><use href="#i-arrow-right"/></svg></button>
+        <p class="publish-note">Ativa o envio para entrevistadores</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SUPERFÍCIE 2 — APP DE COLETA EM CAMPO (mobile)
+     ══════════════════════════════════════════════════ -->
+<section class="surface field" id="surfField" aria-label="Coleta em Campo" hidden>
+
+  <div class="field-tabs" id="fieldTabs" role="group" aria-label="Escolher tela do aplicativo">
+    <button type="button" data-screen="question" class="active" aria-pressed="true">Pergunta</button>
+    <button type="button" data-screen="quota" aria-pressed="false">Cotas</button>
+    <button type="button" data-screen="sync" aria-pressed="false">Sinc.</button>
+    <button type="button" data-screen="exit" aria-pressed="false">Sair</button>
+  </div>
+
+  <!-- ── Moldura do aparelho ── -->
+  <div class="phone">
+    <div class="notch" aria-hidden="true"></div>
+    <div class="phone-inner">
+
+      <!-- ══════════ TELA: PERGUNTA ══════════ -->
+      <section class="fs" id="fsQuestion" aria-label="Tela de pergunta">
+        <div class="q-top">
+          <div>
+            <p class="q-kicker">Festival Canaã 2027</p>
+            <p class="q-count">Pergunta 4 de 12</p>
+          </div>
+          <span class="q-badge">P4</span>
+        </div>
+
+        <div class="q-progress"><i style="width:33%"></i></div>
+
+        <!-- Faixa de status compartilhada -->
+        <div class="strip">
+          <div class="strip-stats">
+            <span><b>23</b> coletadas</span><span class="sep">·</span>
+            <span><b class="green">19</b> sincron.</span><span class="sep">·</span>
+            <span><b class="amber">4</b> pendentes</span>
+          </div>
+          <span class="net off"><svg class="ic ic-10"><use href="#i-wifi-off"/></svg>Sem sinal</span>
+        </div>
+
+        <div class="offline-note">
+          <svg class="ic ic-13"><use href="#i-warning"/></svg>
+          <p>Sem sinal — salvando no aparelho</p>
+        </div>
+
+        <div class="q-body">
+          <p class="q-text">Quais atrações do festival você mais apreciou nesta edição?</p>
+          <p class="q-hint">Pode marcar mais de uma</p>
+
+          <div class="q-opts" id="qOpts">
+            <button type="button" class="q-opt"><span class="q-box"><svg class="ic ic-14"><use href="#i-check"/></svg></span><span class="q-label">Shows musicais</span></button>
+            <button type="button" class="q-opt"><span class="q-box"><svg class="ic ic-14"><use href="#i-check"/></svg></span><span class="q-label">Gastronomia regional</span></button>
+            <button type="button" class="q-opt"><span class="q-box"><svg class="ic ic-14"><use href="#i-check"/></svg></span><span class="q-label">Exposições culturais</span></button>
+            <button type="button" class="q-opt"><span class="q-box"><svg class="ic ic-14"><use href="#i-check"/></svg></span><span class="q-label">Atividades esportivas</span></button>
+            <button type="button" class="q-opt"><span class="q-box"><svg class="ic ic-14"><use href="#i-check"/></svg></span><span class="q-label">Área kids</span></button>
+          </div>
+        </div>
+
+        <div class="q-nav">
+          <button type="button" class="nav-back" aria-label="Pergunta anterior"><svg class="ic ic-20"><use href="#i-arrow-left"/></svg></button>
+          <button type="button" class="nav-next" data-goto="quota">Próxima <svg class="ic ic-18"><use href="#i-arrow-right"/></svg></button>
+        </div>
+      </section>
+
+      <!-- ══════════ TELA: COTAS ══════════ -->
+      <section class="fs" id="fsQuota" aria-label="Painel do entrevistador" hidden>
+        <div class="f-head">
+          <p class="f-head-k">Festival Canaã 2027</p>
+          <p class="f-head-t">Painel do Entrevistador</p>
+        </div>
+
+        <div class="strip">
+          <div class="strip-stats">
+            <span><b>23</b> coletadas</span><span class="sep">·</span>
+            <span><b class="green">19</b> sincron.</span><span class="sep">·</span>
+            <span><b class="amber">4</b> pendentes</span>
+          </div>
+          <span class="net off"><svg class="ic ic-10"><use href="#i-wifi-off"/></svg>Sem sinal</span>
+        </div>
+
+        <div class="f-scroll">
+          <!-- Meta geral -->
+          <div class="card meta-card">
+            <div class="cp" data-pct="58" data-size="72" data-color="#00AEEF" data-label="Meta geral" data-current="23" data-target="40"></div>
+            <div class="meta-txt">
+              <p class="meta-t">Progresso da sessão</p>
+              <p class="meta-d">Você coletou <strong>23</strong> de <strong>40</strong> entrevistas necessárias. Continue!</p>
+              <p class="meta-pend"><i></i>4 pendentes de sincronização</p>
+            </div>
+          </div>
+
+          <p class="sec-kicker">Cotas por Sexo</p>
+          <div class="card circles">
+            <div class="cp" data-pct="64" data-size="80" data-color="#00AEEF" data-label="Masculino" data-current="13" data-target="20"></div>
+            <div class="cp" data-pct="50" data-size="80" data-color="#8B5CF6" data-label="Feminino" data-current="10" data-target="20"></div>
+          </div>
+
+          <p class="sec-kicker">Cotas por Faixa Etária</p>
+          <div class="card">
+            <div class="age-line"><span class="al-label">18–24</span><div class="bar bar-lg"><i style="width:85%;background:#34C98E"></i></div><span class="al-val">17/20</span></div>
+            <div class="age-line"><span class="al-label">25–34</span><div class="bar bar-lg"><i style="width:60%;background:#00AEEF"></i></div><span class="al-val">12/20</span></div>
+            <div class="age-line"><span class="al-label">35–49</span><div class="bar bar-lg"><i style="width:35%;background:#F5A623"></i></div><span class="al-val">7/20</span></div>
+            <div class="age-line"><span class="al-label">50+</span><div class="bar bar-lg"><i style="width:20%;background:#F5A623"></i></div><span class="al-val">2/10</span></div>
+          </div>
+
+          <div class="closed-card">
+            <p class="cc-t">Cotas encerradas</p>
+            <p class="cc-d">Faixa 18–24 já atingiu a meta. Direcione para outras faixas.</p>
+          </div>
+        </div>
+
+        <div class="f-actions">
+          <button type="button" class="act-icon" data-goto="sync" aria-label="Sincronizar entrevistas"><svg class="ic ic-18"><use href="#i-refresh"/></svg></button>
+          <button type="button" class="act-main" data-goto="question"><svg class="ic ic-18"><use href="#i-users"/></svg>Nova entrevista</button>
+        </div>
+      </section>
+
+      <!-- ══════════ TELA: SINCRONIZAÇÃO ══════════ -->
+      <section class="fs" id="fsSync" aria-label="Status de envio" hidden>
+        <div class="f-head">
+          <p class="f-head-k">Sincronização</p>
+          <p class="f-head-t">Status de envio</p>
+        </div>
+
+        <div class="strip">
+          <div class="strip-stats">
+            <span><b>23</b> coletadas</span><span class="sep">·</span>
+            <span><b class="green">19</b> sincron.</span><span class="sep">·</span>
+            <span><b class="amber">4</b> pendentes</span>
+          </div>
+          <span class="net on"><svg class="ic ic-10"><use href="#i-wifi"/></svg>Online</span>
+        </div>
+
+        <div class="sync-body">
+          <div class="sync-ring">
+            <div class="sync-core"><svg class="ic ic-32 bold"><use href="#i-check"/></svg></div>
+          </div>
+
+          <p class="sync-title">Tudo sincronizado!</p>
+          <p class="sync-lead">Todas as entrevistas foram enviadas com sucesso para a plataforma Go Intelligence.</p>
+
+          <div class="stats-card">
+            <div class="stat-row"><span>Entrevistas enviadas</span><b class="green">23</b></div>
+            <div class="stat-row"><span>Tempo de sincronização</span><b>2s</b></div>
+            <div class="stat-row"><span>Última sincronização</span><b>agora</b></div>
+          </div>
+
+          <div class="sync-info">
+            <p class="si-t">Progresso atualizado</p>
+            <p class="si-d">23 de 40 entrevistas coletadas (58% da meta)</p>
+          </div>
+        </div>
+
+        <div class="f-foot">
+          <button type="button" class="btn-primary-lg" data-goto="quota">Continuar coletando <svg class="ic ic-18"><use href="#i-arrow-right"/></svg></button>
+        </div>
+      </section>
+
+      <!-- ══════════ TELA: SAIR (diálogo) ══════════ -->
+      <section class="fs" id="fsExit" role="dialog" aria-modal="true" aria-labelledby="exitTitle" hidden>
+        <div class="f-head f-head-row">
+          <p class="f-head-t" id="exitTitle">Sair do aplicativo</p>
+          <button type="button" class="f-head-x" data-goto="quota" aria-label="Fechar"><svg class="ic ic-20"><use href="#i-x"/></svg></button>
+        </div>
+
+        <div class="strip">
+          <div class="strip-stats">
+            <span><b>23</b> coletadas</span><span class="sep">·</span>
+            <span><b class="green">19</b> sincron.</span><span class="sep">·</span>
+            <span><b class="amber">4</b> pendentes</span>
+          </div>
+          <span class="net off"><svg class="ic ic-10"><use href="#i-wifi-off"/></svg>Sem sinal</span>
+        </div>
+
+        <div class="exit-body">
+          <div class="warn-card">
+            <div class="warn-head">
+              <span class="warn-ico"><svg class="ic ic-20"><use href="#i-warning"/></svg></span>
+              <div>
+                <p class="wh-t">Atenção!</p>
+                <p class="wh-d">Dados não sincronizados</p>
+              </div>
+            </div>
+
+            <div class="warn-body">
+              <p class="wb-t">Você tem 4 entrevistas não sincronizadas</p>
+              <p class="wb-d">Se sair agora, as entrevistas ficarão salvas apenas no aparelho e serão enviadas quando houver conexão.</p>
+
+              <div class="pend-list">
+                <div class="pend-row"><span class="pr-id">ENT-020</span><span class="pr-t">14:18 — aguardando sinal</span></div>
+                <div class="pend-row"><span class="pr-id">ENT-021</span><span class="pr-t">14:31 — aguardando sinal</span></div>
+                <div class="pend-row"><span class="pr-id">ENT-022</span><span class="pr-t">14:47 — aguardando sinal</span></div>
+                <div class="pend-row"><span class="pr-id">ENT-023</span><span class="pr-t">15:02 — aguardando sinal</span></div>
+              </div>
+
+              <p class="wb-note">Recomendamos aguardar o sinal antes de sair.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="exit-actions">
+          <button type="button" class="btn-wait" data-goto="quota">Continuar e aguardar sinal</button>
+          <button type="button" class="btn-leave" data-goto="quota">Sair mesmo assim</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+<p class="demo-note">Demonstração com dados fictícios · Just Go Intelligence Platform</p>
+
+<script src="survey.js?v=1"></script>
+</body>
+</html>
