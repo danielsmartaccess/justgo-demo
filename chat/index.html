@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just Go · GO Intelligence Chat — Assistente Conversacional da Plataforma</title>
+  <meta name="description" content="GO Intelligence Chat: assistente conversacional com agentes especializados, respostas fundamentadas em dados de eventos, gráficos e citação de fontes." />
+  <meta name="theme-color" content="#0D1B2A" />
+  <link rel="icon" href="../assets/logo-justgo.avif" type="image/avif" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="chat.css?v=2" />
+</head>
+<body>
+
+<!-- ══════════ SPRITE DE ÍCONES ══════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="i-message"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></g>
+    <g id="i-plus"><path d="M5 12h14M12 5v14"/></g>
+    <g id="i-thumbs-up"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></g>
+    <g id="i-thumbs-down"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></g>
+    <g id="i-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></g>
+    <g id="i-paperclip"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></g>
+    <g id="i-chevron-down"><path d="m6 9 6 6 6-6"/></g>
+    <g id="i-external"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></g>
+    <g id="i-sparkles"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/><path d="M5 3v4M19 17v4M3 5h4M17 19h4"/></g>
+    <g id="i-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>
+    <g id="i-chart"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></g>
+    <g id="i-code"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></g>
+    <g id="i-cap"><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></g>
+    <g id="i-briefcase"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></g>
+    <g id="i-alert"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></g>
+    <g id="i-x"><path d="M18 6 6 18M6 6l12 12"/></g>
+    <g id="i-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></g>
+    <g id="i-more"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></g>
+    <g id="i-bot"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></g>
+    <g id="i-menu"><path d="M4 6h16M4 12h16M4 18h16"/></g>
+    <g id="i-back"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></g>
+  </defs>
+</svg>
+
+<div class="shell">
+
+  <!-- ══════════════════════════════════════════════════
+       BARRA LATERAL — conversas
+       ══════════════════════════════════════════════════ -->
+  <div class="scrim" id="scrim" hidden></div>
+
+  <aside class="side" id="side">
+
+    <!-- Logo -->
+    <div class="side-brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-sparkles"/></svg></span>
+      <div class="brand-txt">
+        <p class="brand-t">GO Intelligence</p>
+        <p class="brand-s">Just Go Platform</p>
+      </div>
+      <button type="button" class="side-close" id="btnSideClose" aria-label="Fechar lista de conversas">
+        <svg viewBox="0 0 24 24" class="ic ic-16"><use href="#i-x"/></svg>
+      </button>
+    </div>
+
+    <!-- Nova conversa -->
+    <div class="side-new">
+      <button type="button" class="btn-new" id="btnNew">
+        <svg viewBox="0 0 24 24" class="ic ic-15"><use href="#i-plus"/></svg>Nova conversa
+      </button>
+    </div>
+
+    <!-- Busca -->
+    <div class="side-search">
+      <div class="search">
+        <svg viewBox="0 0 24 24" class="ic ic-13"><use href="#i-search"/></svg>
+        <input type="text" id="convSearch" placeholder="Buscar conversas…" aria-label="Buscar conversas" autocomplete="off" />
+      </div>
+    </div>
+
+    <!-- Lista de conversas -->
+    <div class="convs scrollbar-thin">
+      <p class="convs-kicker">Recentes</p>
+      <div id="convList">
+        <button type="button" class="conv is-active" data-conv="1" data-title="Perfil de visitantes Go Pay">
+          <span class="conv-ico" style="background:#6E5BD9"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-chart"/></svg></span>
+          <span class="conv-txt"><span class="conv-t">Perfil de visitantes Go Pay</span><span class="conv-s">Agora</span></span>
+        </button>
+        <button type="button" class="conv" data-conv="2" data-title="Previsão de público — Carnaval 2028">
+          <span class="conv-ico" style="background:#0D7CC7"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-briefcase"/></svg></span>
+          <span class="conv-txt"><span class="conv-t">Previsão de público — Carnaval 2028</span><span class="conv-s">2h atrás</span></span>
+        </button>
+        <button type="button" class="conv" data-conv="3" data-title="Integração Pix com Go Pay">
+          <span class="conv-ico" style="background:#27AE60"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-code"/></svg></span>
+          <span class="conv-txt"><span class="conv-t">Integração Pix com Go Pay</span><span class="conv-s">Ontem</span></span>
+        </button>
+        <button type="button" class="conv" data-conv="4" data-title="Comparativo de receita 2025–2027">
+          <span class="conv-ico" style="background:#6E5BD9"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-chart"/></svg></span>
+          <span class="conv-txt"><span class="conv-t">Comparativo de receita 2025–2027</span><span class="conv-s">Ontem</span></span>
+        </button>
+        <button type="button" class="conv" data-conv="5" data-title="Onboarding equipe prefeitura">
+          <span class="conv-ico" style="background:#E67E22"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-cap"/></svg></span>
+          <span class="conv-txt"><span class="conv-t">Onboarding equipe prefeitura</span><span class="conv-s">22 jul</span></span>
+        </button>
+        <button type="button" class="conv" data-conv="6" data-title="Segmentação de visitantes por bairro">
+          <span class="conv-ico" style="background:#6E5BD9"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-chart"/></svg></span>
+          <span class="conv-txt"><span class="conv-t">Segmentação de visitantes por bairro</span><span class="conv-s">20 jul</span></span>
+        </button>
+        <button type="button" class="conv" data-conv="7" data-title="Relatório de acessibilidade 2027">
+          <span class="conv-ico" style="background:#0D7CC7"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-briefcase"/></svg></span>
+          <span class="conv-txt"><span class="conv-t">Relatório de acessibilidade 2027</span><span class="conv-s">18 jul</span></span>
+        </button>
+      </div>
+      <p class="convs-none" id="convsNone" hidden>Nenhuma conversa encontrada.</p>
+    </div>
+
+    <!-- Usuária -->
+    <div class="side-user">
+      <span class="user-ava">MF</span>
+      <div class="user-txt">
+        <p class="user-n">Mariana Figueiredo</p>
+        <p class="user-r">Gestora · Pref. Anápolis</p>
+      </div>
+      <button type="button" class="user-more" aria-label="Opções da conta">
+        <svg viewBox="0 0 24 24" class="ic ic-15"><use href="#i-more"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════════════
+       ÁREA PRINCIPAL — conversa
+       ══════════════════════════════════════════════════ -->
+  <main class="main">
+
+    <!-- ── Cabeçalho ── -->
+    <header class="head">
+      <button type="button" class="head-burger" id="btnSideOpen" aria-label="Abrir lista de conversas" aria-expanded="false" aria-controls="side">
+        <svg viewBox="0 0 24 24" class="ic ic-16"><use href="#i-menu"/></svg>
+      </button>
+
+      <a class="back-link" href="../" title="Voltar ao site">
+        <svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-back"/></svg><span>Voltar</span>
+      </a>
+      <span class="head-div"></span>
+
+      <div class="head-title">
+        <svg viewBox="0 0 24 24" class="ic ic-15 dim"><use href="#i-message"/></svg>
+        <span id="headTitle">Perfil de visitantes Go Pay</span>
+      </div>
+
+      <!-- Seletor de agente -->
+      <div class="head-agent">
+        <span class="head-agent-l">Agente:</span>
+        <div class="dd-wrap">
+          <button type="button" class="dd-btn" id="ddBtn" aria-expanded="false" aria-haspopup="menu" aria-controls="ddMenu">
+            <span class="dd-ico" id="ddIco" style="color:#6E5BD9"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-chart"/></svg></span>
+            <span id="ddLabel">Analista</span>
+            <svg viewBox="0 0 24 24" class="ic ic-11 dd-chev"><use href="#i-chevron-down"/></svg>
+          </button>
+
+          <div class="dd" id="ddMenu" role="menu" aria-label="Selecionar agente" hidden>
+            <div class="dd-head"><p>Selecionar agente</p></div>
+            <button type="button" class="dd-item" role="menuitemradio" aria-checked="false" data-agent="concierge" data-label="Concierge" data-icon="i-bot" data-color="#00AEEF">
+              <span class="dd-item-ico" style="background:rgba(0,174,239,.094);color:#00AEEF"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-bot"/></svg></span>
+              <span class="dd-item-txt">
+                <span class="dd-item-l">Concierge<span class="dd-tag">Ativo</span></span>
+                <span class="dd-item-d">Responde dúvidas gerais e orienta sobre a plataforma</span>
+              </span>
+            </button>
+            <button type="button" class="dd-item" role="menuitemradio" aria-checked="false" data-agent="gestor" data-label="Gestor" data-icon="i-briefcase" data-color="#0D7CC7">
+              <span class="dd-item-ico" style="background:rgba(13,124,199,.094);color:#0D7CC7"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-briefcase"/></svg></span>
+              <span class="dd-item-txt">
+                <span class="dd-item-l">Gestor<span class="dd-tag">Ativo</span></span>
+                <span class="dd-item-d">Apoia decisões estratégicas e gestão de eventos</span>
+              </span>
+            </button>
+            <button type="button" class="dd-item is-on" role="menuitemradio" aria-checked="true" data-agent="analista" data-label="Analista" data-icon="i-chart" data-color="#6E5BD9">
+              <span class="dd-item-ico" style="background:rgba(110,91,217,.094);color:#6E5BD9"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-chart"/></svg></span>
+              <span class="dd-item-txt">
+                <span class="dd-item-l">Analista<span class="dd-tag">Ativo</span></span>
+                <span class="dd-item-d">Analisa dados, KPIs e gera relatórios detalhados</span>
+              </span>
+            </button>
+            <button type="button" class="dd-item" role="menuitemradio" aria-checked="false" data-agent="po" data-label="Product Owner" data-icon="i-users" data-color="#9B59B6">
+              <span class="dd-item-ico" style="background:rgba(155,89,182,.094);color:#9B59B6"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-users"/></svg></span>
+              <span class="dd-item-txt">
+                <span class="dd-item-l">Product Owner<span class="dd-tag">Ativo</span></span>
+                <span class="dd-item-d">Prioriza backlog e define requisitos de produto</span>
+              </span>
+            </button>
+            <button type="button" class="dd-item" role="menuitemradio" aria-checked="false" data-agent="dev" data-label="Desenvolvedor" data-icon="i-code" data-color="#27AE60">
+              <span class="dd-item-ico" style="background:rgba(39,174,96,.094);color:#27AE60"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-code"/></svg></span>
+              <span class="dd-item-txt">
+                <span class="dd-item-l">Desenvolvedor<span class="dd-tag">Ativo</span></span>
+                <span class="dd-item-d">Suporte técnico, APIs e integrações da plataforma</span>
+              </span>
+            </button>
+            <button type="button" class="dd-item" role="menuitemradio" aria-checked="false" data-agent="professor" data-label="Professor" data-icon="i-cap" data-color="#E67E22">
+              <span class="dd-item-ico" style="background:rgba(230,126,34,.094);color:#E67E22"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-cap"/></svg></span>
+              <span class="dd-item-txt">
+                <span class="dd-item-l">Professor<span class="dd-tag">Ativo</span></span>
+                <span class="dd-item-d">Explica conceitos e capacita equipes na plataforma</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Faixa de chips de agentes ── -->
+    <div class="chips scrollbar-none" id="chips">
+      <button type="button" class="chip" data-agent="concierge"><span class="chip-ico" style="color:#00AEEF"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-bot"/></svg></span>Concierge</button>
+      <button type="button" class="chip" data-agent="gestor"><span class="chip-ico" style="color:#0D7CC7"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-briefcase"/></svg></span>Gestor</button>
+      <button type="button" class="chip is-on" data-agent="analista"><span class="chip-ico" style="color:#6E5BD9"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-chart"/></svg></span>Analista</button>
+      <button type="button" class="chip" data-agent="po"><span class="chip-ico" style="color:#9B59B6"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-users"/></svg></span>Product Owner</button>
+      <button type="button" class="chip" data-agent="dev"><span class="chip-ico" style="color:#27AE60"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-code"/></svg></span>Desenvolvedor</button>
+      <button type="button" class="chip" data-agent="professor"><span class="chip-ico" style="color:#E67E22"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-cap"/></svg></span>Professor</button>
+    </div>
+
+    <!-- ══════════ ESTADO VAZIO ══════════ -->
+    <div class="empty" id="viewEmpty" hidden>
+      <span class="empty-mark"><svg viewBox="0 0 24 24" class="ic ic-22"><use href="#i-sparkles"/></svg></span>
+      <h2 id="emptyTitle">Nova conversa com Analista</h2>
+      <p class="empty-sub">Faça perguntas sobre dados de eventos, público e receita da plataforma GO Intelligence.</p>
+
+      <div class="examples">
+        <button type="button" class="ex" data-prompt="Qual foi a receita total do Festival Canaã 2027 por categoria de ingresso?">
+          <span class="ex-ico" style="background:rgba(110,91,217,.082);color:#6E5BD9"><svg viewBox="0 0 24 24" class="ic ic-20"><use href="#i-chart"/></svg></span>
+          <p class="ex-t">Análise de receita</p>
+          <p class="ex-d">Qual foi a receita total do Festival Canaã 2027 por categoria de ingresso?</p>
+        </button>
+        <button type="button" class="ex" data-prompt="Qual o perfil demográfico dos visitantes que mais utilizaram o Go Pay?">
+          <span class="ex-ico" style="background:rgba(0,174,239,.082);color:#00AEEF"><svg viewBox="0 0 24 24" class="ic ic-20"><use href="#i-users"/></svg></span>
+          <p class="ex-t">Perfil de público</p>
+          <p class="ex-d">Qual o perfil demográfico dos visitantes que mais utilizaram o Go Pay?</p>
+        </button>
+        <button type="button" class="ex" data-prompt="Compare o desempenho de vendas do 1º semestre de 2027 com 2026.">
+          <span class="ex-ico" style="background:rgba(13,27,42,.082);color:#0D1B2A"><svg viewBox="0 0 24 24" class="ic ic-20"><use href="#i-briefcase"/></svg></span>
+          <p class="ex-t">Comparativo histórico</p>
+          <p class="ex-d">Compare o desempenho de vendas do 1º semestre de 2027 com 2026.</p>
+        </button>
+        <button type="button" class="ex" data-prompt="Quais segmentos de visitantes têm maior potencial de conversão em 2028?">
+          <span class="ex-ico" style="background:rgba(230,126,34,.082);color:#E67E22"><svg viewBox="0 0 24 24" class="ic ic-20"><use href="#i-sparkles"/></svg></span>
+          <p class="ex-t">Oportunidades</p>
+          <p class="ex-d">Quais segmentos de visitantes têm maior potencial de conversão em 2028?</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════ CONVERSA ══════════ -->
+    <div class="thread scrollbar-thin" id="viewChat">
+
+      <!-- Mensagem da usuária -->
+      <div class="row-user">
+        <div class="msg-user">
+          <div class="bubble-user">Qual o perfil dos visitantes que mais gastaram no Go Pay?</div>
+          <p class="msg-meta">16:42 · Você</p>
+        </div>
+      </div>
+
+      <!-- Resposta do agente -->
+      <div class="row-ai">
+        <span class="ai-ava"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-chart"/></svg></span>
+
+        <div class="ai-body">
+          <div class="ai-head">
+            <span class="ai-name">Analista</span>
+            <span class="ai-time">16:42</span>
+            <span class="ai-state"><i></i>Gerando</span>
+          </div>
+
+          <div class="ai-card">
+
+            <!-- Texto -->
+            <div class="ai-text">
+              <p>Com base nas transações do <strong>Festival Canaã 2027</strong>, o perfil de maior gasto no Go Pay é composto predominantemente por visitantes na faixa etária de <strong>35 a 44 anos</strong>, com ticket médio de <span class="hl-blue">R$ 6.340</span> — um crescimento de <span class="hl-green">+23,8%</span> em relação a 2026.</p>
+              <p>A segunda faixa de maior consumo são visitantes entre <strong>25 e 34 anos</strong>, seguidos pelo grupo <strong>45–54 anos</strong>. O segmento mais jovem (18–24) apresentou crescimento moderado de 10,8%, enquanto visitantes 55+ demonstram potencial de expansão.</p>
+            </div>
+
+            <!-- Gráfico -->
+            <div class="ai-chart">
+              <p class="chart-kicker">Gasto médio por faixa etária (R$)</p>
+              <div class="chart-box">
+                <svg id="ageChart" role="img" aria-label="Gráfico de barras do gasto médio por faixa etária, comparando 2027 e 2026"></svg>
+                <div class="chart-tip" id="chartTip" hidden></div>
+              </div>
+              <div class="legend">
+                <span><i style="background:#00AEEF"></i>2027</span>
+                <span><i class="half" style="background:#0D1B2A"></i>2026</span>
+              </div>
+            </div>
+
+            <!-- Rodapé de fonte -->
+            <div class="ai-source">
+              <div class="src-txt">
+                <svg viewBox="0 0 24 24" class="ic ic-12"><use href="#i-alert"/></svg>
+                <p>Fonte: <span>Go Pay transações</span> · <span>Festival Canaã 2027</span> · 14–16 jun</p>
+              </div>
+              <button type="button" class="src-link">Ver consulta<svg viewBox="0 0 24 24" class="ic ic-10"><use href="#i-external"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Sugestões de continuidade + avaliação -->
+          <div class="ai-foot">
+            <button type="button" class="follow" data-prompt="Comparar com 2026">Comparar com 2026</button>
+            <button type="button" class="follow" data-prompt="Segmentar por idade">Segmentar por idade</button>
+            <button type="button" class="follow" data-prompt="Exportar análise">Exportar análise</button>
+            <div class="fb-group">
+              <button type="button" class="fb fb-up" id="fbUp" aria-label="Resposta útil" aria-pressed="false"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-thumbs-up"/></svg></button>
+              <button type="button" class="fb fb-down" id="fbDown" aria-label="Resposta não útil" aria-pressed="false"><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-thumbs-down"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Aviso de conteúdo gerado por IA ── -->
+    <div class="disclaimer">
+      <svg viewBox="0 0 24 24" class="ic ic-12"><use href="#i-alert"/></svg>
+      <p>Conteúdo gerado por IA — confira as fontes antes de decisões oficiais.</p>
+    </div>
+
+    <!-- ── Campo de composição ── -->
+    <div class="composer">
+      <div class="comp-box" id="compBox">
+        <button type="button" class="comp-clip" aria-label="Anexar arquivo"><svg viewBox="0 0 24 24" class="ic ic-16"><use href="#i-paperclip"/></svg></button>
+        <input type="text" id="compInput" placeholder="Pergunte sobre seus dados…" aria-label="Pergunte sobre seus dados" autocomplete="off" />
+        <button type="button" class="comp-send" id="btnSend" aria-label="Enviar mensagem" disabled><svg viewBox="0 0 24 24" class="ic ic-14"><use href="#i-send"/></svg></button>
+      </div>
+      <p class="comp-note">GO Intelligence pode cometer erros. Verifique informações importantes.</p>
+    </div>
+  </main>
+</div>
+
+<p class="demo-note">Demonstração com dados fictícios · Just Go Intelligence Platform</p>
+
+<script src="chat.js?v=2"></script>
+</body>
+</html>
