@@ -57,6 +57,7 @@ const DATA = {
     { k: ["mapa", "onde fica", "localiza", "chegar"], r: "🗺️ Toque na aba <strong>Mapa</strong> — todos os palcos, banheiros, barracas e estacionamentos estão marcados. Toque em um pin para detalhes." },
     { k: ["quadrilha", "final"], r: "💃 A <strong>Grande Final das Quadrilhas</strong> é domingo às 20h00 na Arena Junina. Garanta lugar com antecedência — é o momento mais disputado!" },
     { k: ["qr", "ingresso", "entrada"], r: "🎫 Seu QR Code de acesso está no <strong>Perfil</strong>. Apresente na entrada e nas barracas parceiras para vantagens exclusivas." },
+    { k: ["pagar", "pagamento", "carteira", "saldo", "recarregar", "pix", "dinheiro", "cartão", "cartao"], r: "💳 O evento é 100% cashless com o <strong>Go Pay</strong>! Sua carteira está no Perfil — recarregue via Pix e pague com QR em qualquer barraca ou expositor oficial. Rápido e sem fila." },
   ],
 };
 
@@ -133,7 +134,7 @@ const VIEW = {
         <button class="tile" data-go="expo">🛍️<span>Expo</span></button>
         <button class="tile gold" data-go="perfil">🎫<span>QR Code</span></button>
         <button class="tile" data-go="favoritos">⭐<span>Favoritos</span></button>
-        <button class="tile" data-go="ia">🤖<span>Go AI</span></button>
+        <button class="tile gold" data-go="perfil">💳<span>Go Pay</span></button>
         <button class="tile" data-sos>🚑<span>Emergência</span></button>
       </div>
 
@@ -287,6 +288,19 @@ const VIEW = {
           <span class="vip-badge">★ ACESSO GOLD</span>
         </div>
       </div>
+      <div class="wallet-card">
+        <div class="wallet-top">
+          <small>💳 GO PAY · CARTEIRA DO EVENTO</small>
+          <span class="wallet-badge">cashless</span>
+        </div>
+        <div class="wallet-balance">R$ 87,50</div>
+        <div class="wallet-actions">
+          <button data-wallet="recarga">＋ Recarregar</button>
+          <button data-wallet="pagar">Pagar com QR</button>
+          <button data-wallet="extrato">Extrato</button>
+        </div>
+        <small class="wallet-note">Aceito em todas as barracas e expositores oficiais do evento.</small>
+      </div>
       <div class="stat-row">
         <div class="stat"><strong>${state.favs.size}</strong><span>Favoritos</span></div>
         <div class="stat"><strong>3</strong><span>Check-ins</span></div>
@@ -297,6 +311,7 @@ const VIEW = {
         ${[1, 2, 3, 4, 5].map((n) => `<button data-rate="${n}" class="${state.rating >= n ? "on" : ""}">⭐</button>`).join("")}
       </div>
       <p class="rate-hint" id="rateHint">${state.rating ? "Obrigado! Sua avaliação vira indicador em tempo real. ✨" : "Toque nas estrelas para avaliar o festival."}</p>
+      <p class="research-credit">Pesquisa oficial do evento em parceria técnica com <strong>Foccus Pesquisas</strong>.</p>
       <button class="btn-sos" data-sos>🚑 &nbsp;Emergência — chamar equipe</button>
     </div>`,
 };
@@ -358,6 +373,17 @@ document.addEventListener("click", (e) => {
   }
   const rota = e.target.closest("[data-rota]");
   if (rota) { toast(`📍 Rota traçada até ${rota.dataset.rota}`); return; }
+
+  const wallet = e.target.closest("[data-wallet]");
+  if (wallet) {
+    const acts = {
+      recarga: "💳 Recarga via Pix: aponte a câmera para o QR no caixa oficial. (demo)",
+      pagar: "📲 Aproxime o QR da maquininha da barraca para pagar. (demo)",
+      extrato: "🧾 Extrato: 3 pagamentos hoje · R$ 32,50 em consumo. (demo)",
+    };
+    toast(acts[wallet.dataset.wallet]);
+    return;
+  }
 
   const rate = e.target.closest("#rateRow [data-rate]");
   if (rate) { state.rating = +rate.dataset.rate; render(); return; }

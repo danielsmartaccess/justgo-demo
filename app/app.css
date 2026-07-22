@@ -50,17 +50,18 @@ button { font-family: inherit; cursor: pointer; }
   .app { border-radius: 44px; min-height: calc(100dvh - 56px); }
 }
 
-/* ══════════ LOGO ══════════ */
-.logo-just {
-  font-family: var(--font-logo); font-weight: 800; font-size: 92px;
-  fill: var(--white); letter-spacing: -2px;
+/* ══════════ LOGO (marca original sobre cartão branco) ══════════ */
+.splash-tile {
+  width: 150px; height: 150px; border-radius: 36px; background: #fff;
+  display: grid; place-items: center; padding: 18px;
+  box-shadow: 0 20px 60px rgba(0, 174, 239, .25);
 }
-.logo-just-inline {
-  font-family: var(--font-logo); font-weight: 800; font-size: 82px;
-  fill: var(--white); letter-spacing: -2px;
+.splash-tile img { width: 100%; height: 100%; object-fit: contain; }
+.header-brand {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #fff; border-radius: 12px; padding: 5px 10px; height: 42px;
 }
-.logo-mark.lg { width: 168px; }
-.logo-mark.sm { height: 30px; width: auto; }
+.header-brand img { height: 100%; width: auto; object-fit: contain; }
 
 /* ══════════ SPLASH ══════════ */
 .splash {
@@ -279,6 +280,36 @@ button { font-family: inherit; cursor: pointer; }
 .rate-row button { background: none; border: 0; filter: grayscale(1); opacity: .35; transition: .2s; font-size: 30px; }
 .rate-row button.on { filter: none; opacity: 1; transform: scale(1.1); }
 .rate-hint { text-align: center; color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+
+/* ── Go Pay carteira ── */
+.wallet-card {
+  margin-top: 14px; border-radius: var(--r); padding: 18px;
+  background:
+    radial-gradient(260px 150px at 90% -10%, rgba(0,174,239,.25), transparent 60%),
+    linear-gradient(150deg, #10233b, #0a1322);
+  border: 1px solid rgba(0,174,239,.35);
+}
+.wallet-top { display: flex; justify-content: space-between; align-items: center; }
+.wallet-top small { color: var(--muted); font-size: 10.5px; font-weight: 800; letter-spacing: .1em; }
+.wallet-badge {
+  font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  color: #0b0d10; background: var(--grad-gold); padding: 3px 10px; border-radius: 99px;
+}
+.wallet-balance { font-size: 30px; font-weight: 800; letter-spacing: -.02em; margin: 8px 0 12px; }
+.wallet-actions { display: flex; gap: 8px; }
+.wallet-actions button {
+  flex: 1; border: 1px solid rgba(0,174,239,.4); background: rgba(0,174,239,.1);
+  color: var(--logo-blue); border-radius: 12px; padding: 9px 4px;
+  font-size: 12px; font-weight: 700; transition: .2s;
+}
+.wallet-actions button:first-child { background: var(--grad-blue); color: #fff; border-color: transparent; }
+.wallet-actions button:active { transform: scale(.95); }
+.wallet-note { display: block; margin-top: 10px; color: var(--muted); font-size: 11px; }
+.research-credit {
+  text-align: center; color: var(--muted); font-size: 11px; margin: 14px 0 2px;
+  padding-top: 12px; border-top: 1px solid var(--line);
+}
+.research-credit strong { color: #7ea2c9; }
 
 .btn-sos {
   width: 100%; margin-top: 16px; padding: 15px; border-radius: 16px; border: 1px solid rgba(255,90,90,.4);

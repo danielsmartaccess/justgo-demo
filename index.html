@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=2" />
 </head>
 <body>
 
@@ -19,8 +19,7 @@
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#inicio" class="brand">
-        <span class="brand-mark">JG</span>
-        <span class="brand-name">Just&nbsp;Go</span>
+        <img src="assets/logo-justgo.jpg" alt="Just Go" class="brand-logo" />
       </a>
       <nav class="nav-links" id="navLinks">
         <a href="#plataforma">Plataforma</a>
@@ -221,6 +220,55 @@
         A mesma tecnologia utilizada na pesquisa do <strong>Festival Canaã Cidade Junina</strong>
         pode ser aplicada em qualquer evento, cidade ou pesquisa institucional.
       </p>
+      <div class="partner-badge reveal">
+        <span class="pb-label">Parceria técnica em pesquisas</span>
+        <img src="assets/logo-foccus.png" alt="Foccus Pesquisas" class="pb-logo"
+             onerror="this.style.display='none'" />
+        <div class="pb-text">
+          <strong>Foccus Pesquisas</strong>
+          <small>Metodologia, coleta em campo e rigor estatístico — pesquisas com validade técnica e institucional.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ VALOR PARA A CIDADE ══════════ -->
+  <section class="section" id="valor-cidade">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Transparência e resultado</span>
+        <h2>Um evento que presta contas à cidade inteira.</h2>
+        <p>Cada real investido vira dado auditável. Cada público atendido enxerga o seu ganho.</p>
+      </div>
+      <div class="value-grid">
+        <div class="value-card reveal">
+          <span>🏛️</span>
+          <strong>Gestão municipal</strong>
+          <p>Controle total do evento em um só lugar — inclusive da movimentação financeira. Relatórios auditáveis de impacto econômico, empregos e arrecadação, prontos para a prestação de contas aos órgãos de controle.</p>
+        </div>
+        <div class="value-card reveal d1">
+          <span>🏪</span>
+          <strong>Comércio local</strong>
+          <p>O impacto nas vendas de cada setor é medido e comprovado. O comerciante enxerga o retorno do evento — e a gestão mostra à cidade quem ganhou com ele.</p>
+        </div>
+        <div class="value-card reveal d2">
+          <span>🏘️</span>
+          <strong>Moradores</strong>
+          <p>A população é ouvida: satisfação, serviços e sugestões viram indicadores públicos. O evento passa a ser planejado com a voz de quem vive na cidade.</p>
+        </div>
+        <div class="value-card reveal d3">
+          <span>🤝</span>
+          <strong>Patrocinadores e organizadores</strong>
+          <p>ROI demonstrado com números independentes: público, fluxo, mídia e consumo. Renovar patrocínio deixa de ser aposta e vira decisão baseada em evidência.</p>
+        </div>
+      </div>
+      <div class="gopay-strip reveal">
+        <div class="gopay-icon">💳</div>
+        <div>
+          <strong>Go Pay — pagamentos centralizados na plataforma</strong>
+          <p>Ingressos, barracas e expositores em um único meio de pagamento digital. Receita em tempo real, conciliação automática e visibilidade completa da economia do evento para a gestão.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -349,6 +397,8 @@
           <li>Relatórios automáticos</li>
           <li>Índices de satisfação (NPS · CSAT)</li>
           <li>Medição de impacto econômico</li>
+          <li>Evidências para prestação de contas</li>
+          <li>Campo realizado com a Foccus Pesquisas</li>
         </ul>
       </div>
     </div>
@@ -359,7 +409,7 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Ecossistema Just Go</span>
-        <h2>Uma plataforma, seis produtos.</h2>
+        <h2>Uma plataforma, oito produtos.</h2>
       </div>
       <div class="prod-grid reveal">
         <div class="prod-card"><span>📱</span><strong>Go Event</strong><p>Aplicativo oficial do evento</p></div>
@@ -368,6 +418,8 @@
         <div class="prod-card"><span>🤖</span><strong>Go AI</strong><p>Assistente inteligente do visitante</p></div>
         <div class="prod-card"><span>🛍️</span><strong>Go Expo</strong><p>Gestão completa de expositores</p></div>
         <div class="prod-card"><span>🏖️</span><strong>Go Tourism</strong><p>Indicadores turísticos da cidade</p></div>
+        <div class="prod-card gopay"><span>💳</span><strong>Go Pay</strong><p>Pagamentos centralizados e receita em tempo real</p></div>
+        <div class="prod-card"><span>📄</span><strong>Go Report</strong><p>Relatórios executivos e prestação de contas</p></div>
       </div>
     </div>
   </section>
@@ -396,8 +448,7 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="brand">
-        <span class="brand-mark">JG</span>
-        <span class="brand-name">Just&nbsp;Go</span>
+        <img src="assets/logo-justgo.jpg" alt="Just Go" class="brand-logo" />
       </div>
       <nav>
         <a href="https://github.com/danielsmartaccess" target="_blank" rel="noopener">GitHub</a>
@@ -408,6 +459,6 @@
     </div>
   </footer>
 
-  <script src="js/app.js"></script>
+  <script src="js/app.js?v=2"></script>
 </body>
 </html>

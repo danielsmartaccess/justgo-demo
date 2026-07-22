@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="app.css?v=2" />
 </head>
 <body>
 
@@ -19,17 +19,9 @@
   <!-- ══════════ SPLASH ══════════ -->
   <div class="splash" id="splash">
     <div class="splash-logo">
-      <svg class="logo-mark lg" viewBox="0 -10 260 275" aria-label="Just Go">
-        <text x="145" y="95" text-anchor="middle" class="logo-just">Just</text>
-        <g class="logo-go">
-          <!-- G : arco quase completo com abertura à direita -->
-          <path d="M 150.7 169.7 A 50 50 0 1 0 150.7 210.3" fill="none" stroke="var(--logo-blue)" stroke-width="26" stroke-linecap="round"/>
-          <!-- barra do G que atravessa para o loop do "o" -->
-          <path d="M 128 190 H 175" fill="none" stroke="var(--logo-blue)" stroke-width="26" stroke-linecap="round"/>
-          <!-- o : loop infinito à direita -->
-          <path d="M 175 190 A 30 30 0 1 1 205 220" fill="none" stroke="var(--logo-blue)" stroke-width="26" stroke-linecap="round"/>
-        </g>
-      </svg>
+      <div class="splash-tile">
+        <img src="../assets/logo-justgo.jpg" alt="Just Go" />
+      </div>
       <div class="splash-ring"></div>
     </div>
     <p class="splash-tag">Seu evento. Mais inteligente.</p>
@@ -40,14 +32,9 @@
   <div class="statusbar"><span id="clock">21:34</span><span class="sb-icons">📶 🔋</span></div>
 
   <header class="app-header">
-    <svg class="logo-mark sm" viewBox="0 -12 310 137" aria-label="Just Go">
-      <text x="0" y="80" class="logo-just-inline">Just</text>
-      <g transform="translate(175,0)">
-        <path d="M 68.3 42.4 A 31 31 0 1 0 68.3 67.6" fill="none" stroke="var(--logo-blue)" stroke-width="16" stroke-linecap="round"/>
-        <path d="M 54 55 H 84" fill="none" stroke="var(--logo-blue)" stroke-width="16" stroke-linecap="round"/>
-        <path d="M 83 55 A 19 19 0 1 1 102 74" fill="none" stroke="var(--logo-blue)" stroke-width="16" stroke-linecap="round"/>
-      </g>
-    </svg>
+    <span class="header-brand">
+      <img src="../assets/logo-justgo.jpg" alt="Just Go" />
+    </span>
     <div class="header-right">
       <button class="icon-btn" id="btnSearch" aria-label="Buscar">🔍</button>
       <button class="icon-btn has-dot" id="btnBell" aria-label="Notificações">🔔</button>
@@ -81,6 +68,6 @@
   <div class="toast" id="toast" hidden></div>
 </div>
 
-<script src="app.js"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>
