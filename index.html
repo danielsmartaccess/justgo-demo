@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=3" />
+  <link rel="stylesheet" href="css/styles.css?v=4" />
 </head>
 <body>
 
@@ -122,6 +122,35 @@
     </div>
   </section>
 
+  <!-- ══════════ GO INTELLIGENCE (cérebro da plataforma) ══════════ -->
+  <section class="section section-dark" id="go-intelligence">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow light">O cérebro da plataforma</span>
+        <h2>GO Intelligence: a IA que opera<br/>seu evento e sua cidade.</h2>
+        <p style="color:#94a3b8">Toda pergunta vira ação: a IA entende a intenção, aciona o agente certo, executa e aprende. Não é um chatbot — é um sistema operacional inteligente.</p>
+      </div>
+      <div class="intel-diagram reveal">
+        <div class="intel-core">🧠 GO INTELLIGENCE · IA CENTRAL</div>
+        <div class="intel-arrow">▼</div>
+        <div class="intel-layer">
+          <span>🧍 Pessoas</span><span>🏢 Empresas</span><span>🎪 Eventos</span><span>🏛️ Governo</span>
+        </div>
+        <div class="intel-arrow">▼</div>
+        <div class="intel-label">ENGINE DE AGENTES ESPECIALIZADOS</div>
+        <div class="intel-layer agents">
+          <span>🤵 Concierge</span><span>📊 Gestor</span><span>📈 Analista</span><span>📋 Product Owner</span><span>💻 Desenvolvedor</span><span>🎓 Professor</span>
+        </div>
+        <div class="intel-arrow">▼</div>
+        <div class="intel-layer mods">
+          <span>Go Event</span><span>Go Pay</span><span>Go Survey</span><span>Go City</span><span>Go Access</span><span>Go Commerce</span>
+        </div>
+        <div class="intel-arrow">▼</div>
+        <div class="intel-base">APIs · MCP · IoT · ERP · Power BI</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════ APP DEMO ══════════ -->
   <section class="section section-alt" id="app-demo">
     <div class="container">
@@ -191,6 +220,16 @@
           <div class="ring" style="--pct:94"><span>94%</span></div>
           <small class="dash-note">CSAT geral dos visitantes</small>
         </div>
+      </div>
+      <div class="briefing reveal">
+        <div class="briefing-head"><span class="brief-dot"></span>GO INTELLIGENCE · BRIEFING DO GESTOR — sábado, 21h34</div>
+        <ul>
+          <li><strong>5.843 visitantes</strong> no evento agora · pico previsto para 22h10</li>
+          <li>Estacionamento Sul em 87% — <strong>sugestão:</strong> direcionar o fluxo para o Norte (34%)</li>
+          <li>Receita Go Pay do dia: <strong>R$ 412.300</strong> · conciliação automática em dia</li>
+          <li>Satisfação 94% (+2 p.p. vs ontem) · 3 ocorrências abertas no setor G4</li>
+          <li>Relatório parcial de prestação de contas: <strong>pronto para exportar</strong></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -296,14 +335,20 @@
   <section class="section section-alt" id="go-ai">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Go AI</span>
-        <h2>Inteligência Artificial no evento.</h2>
-        <p>Experimente: pergunte algo que um visitante perguntaria. A demo responde com dados simulados do festival.</p>
+        <span class="eyebrow">Go AI · Agentes especializados</span>
+        <h2>Uma IA, vários especialistas.</h2>
+        <p>Escolha um agente e converse: cada um domina uma função — atendimento ao visitante, concierge de turismo, operação do evento e análise executiva.</p>
+      </div>
+      <div class="agent-picker reveal" id="agentPicker">
+        <button data-agent="visitante" class="active">🎪 Visitante</button>
+        <button data-agent="concierge">🤵 Concierge</button>
+        <button data-agent="gestor">📊 Gestor</button>
+        <button data-agent="analista">📈 Analista</button>
       </div>
       <div class="chat reveal" aria-live="polite">
         <div class="chat-header">
           <span class="chat-avatar">🤖</span>
-          <div><strong>Go AI</strong><small>Assistente do Festival · online</small></div>
+          <div><strong id="agentName">Go AI</strong><small id="agentDesc">Assistente do Festival · online</small></div>
         </div>
         <div class="chat-body" id="chatBody">
           <div class="msg bot">Olá! 👋 Sou a Go AI. Posso ajudar com shows, comida, banheiros, estacionamento e muito mais. Pergunte algo!</div>
@@ -409,7 +454,7 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Ecossistema Just Go</span>
-        <h2>Uma plataforma, oito produtos.</h2>
+        <h2>Oito produtos hoje.<br/>Um ecossistema amanhã.</h2>
       </div>
       <div class="prod-grid reveal">
         <div class="prod-card"><span>📱</span><strong>Go Event</strong><p>Aplicativo oficial do evento</p></div>
@@ -420,6 +465,10 @@
         <div class="prod-card"><span>🏖️</span><strong>Go Tourism</strong><p>Indicadores turísticos da cidade</p></div>
         <div class="prod-card gopay"><span>💳</span><strong>Go Pay</strong><p>Pagamentos centralizados e receita em tempo real</p></div>
         <div class="prod-card"><span>📄</span><strong>Go Report</strong><p>Relatórios executivos e prestação de contas</p></div>
+        <div class="prod-card soon"><span>🏙️</span><strong>Go City</strong><em class="soon-badge">Roadmap</em><p>A cidade inteligente além do evento</p></div>
+        <div class="prod-card soon"><span>🔑</span><strong>Go Access</strong><em class="soon-badge">Roadmap</em><p>Credenciamento e controle de acesso</p></div>
+        <div class="prod-card soon"><span>🛒</span><strong>Go Commerce</strong><em class="soon-badge">Roadmap</em><p>Cashback e fidelidade no comércio local</p></div>
+        <div class="prod-card soon"><span>🧪</span><strong>GO AI Studio</strong><em class="soon-badge">Roadmap</em><p>Crie seus próprios agentes, sem código</p></div>
       </div>
     </div>
   </section>
@@ -452,6 +501,7 @@
       </div>
       <nav>
         <a href="https://github.com/danielsmartaccess" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/danielsmartaccess/justgo-demo/tree/main/docs" target="_blank" rel="noopener">Documentação</a>
         <a href="#contato">Contato</a>
         <a href="#inicio">Topo ↑</a>
       </nav>
@@ -459,6 +509,6 @@
     </div>
   </footer>
 
-  <script src="js/app.js?v=3"></script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>

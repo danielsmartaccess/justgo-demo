@@ -330,6 +330,69 @@ button { font-family: inherit; cursor: pointer; }
 .seg-card span { font-size: 14.5px; font-weight: 600; }
 .seg-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #c7d8fe; }
 
+/* ══════════ GO INTELLIGENCE ══════════ */
+.intel-diagram { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.intel-core {
+  background: linear-gradient(135deg, #00aeef, #7c3aed); color: #fff;
+  font-weight: 800; font-size: 17px; letter-spacing: .04em;
+  padding: 18px 44px; border-radius: 18px;
+  box-shadow: 0 16px 44px rgba(0, 174, 239, .4);
+}
+.intel-arrow { color: #3b82f6; font-size: 13px; opacity: .8; }
+.intel-label { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #64748b; }
+.intel-layer { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.intel-layer span {
+  background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .14);
+  color: #e2e8f0; font-size: 13.5px; font-weight: 600;
+  padding: 10px 18px; border-radius: 999px;
+}
+.intel-layer.agents span { border-color: rgba(0, 174, 239, .45); background: rgba(0, 174, 239, .1); }
+.intel-layer.mods span { border-color: rgba(124, 58, 237, .45); background: rgba(124, 58, 237, .12); }
+.intel-base {
+  border: 1px dashed rgba(255, 255, 255, .25); color: #94a3b8;
+  font-size: 12.5px; font-weight: 600; letter-spacing: .08em;
+  padding: 10px 26px; border-radius: 999px;
+}
+
+/* ══════════ BRIEFING DO GESTOR ══════════ */
+.briefing {
+  margin-top: 18px; border-radius: var(--radius); overflow: hidden;
+  background: #0b1220; border: 1px solid rgba(0, 174, 239, .3);
+  font-family: "Consolas", "SF Mono", monospace;
+}
+.briefing-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 20px; border-bottom: 1px solid rgba(255, 255, 255, .08);
+  color: #7dd3fc; font-size: 12px; font-weight: 700; letter-spacing: .1em;
+}
+.brief-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 4px rgba(34, 197, 94, .18); animation: blinkDot 1.6s infinite; }
+@keyframes blinkDot { 50% { opacity: .4; } }
+.briefing ul { list-style: none; padding: 16px 20px; display: flex; flex-direction: column; gap: 9px; }
+.briefing li { color: #cbd5e1; font-size: 13.5px; padding-left: 22px; position: relative; }
+.briefing li::before { content: "✔"; position: absolute; left: 0; color: #22c55e; font-weight: 700; }
+.briefing li strong { color: #fff; }
+
+/* ══════════ AGENT PICKER ══════════ */
+.agent-picker { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+.agent-picker button {
+  border: 1px solid var(--line); background: #fff; color: var(--ink-2);
+  border-radius: 999px; padding: 10px 20px; font-size: 14px; font-weight: 600; transition: .2s;
+}
+.agent-picker button:hover { border-color: var(--blue); color: var(--blue); }
+.agent-picker button.active {
+  background: var(--grad); color: #fff; border-color: transparent;
+  box-shadow: 0 8px 22px rgba(37, 99, 235, .35);
+}
+
+/* produto em roadmap */
+.prod-card.soon { border-style: dashed; opacity: .85; position: relative; }
+.soon-badge {
+  position: absolute; top: 14px; right: 14px; font-style: normal;
+  font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  color: #b45309; background: #fef3c7; padding: 3px 9px; border-radius: 99px;
+}
+.prod-card { position: relative; }
+
 /* ══════════ CHAT GO AI ══════════ */
 .chat {
   max-width: 620px; margin: 0 auto; background: #fff; border: 1px solid var(--line);

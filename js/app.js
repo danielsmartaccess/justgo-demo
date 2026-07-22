@@ -256,7 +256,7 @@ const chatForm = document.getElementById("chatForm");
 const chatText = document.getElementById("chatText");
 const chatChips = document.getElementById("chatChips");
 
-const respostas = [
+const respostasVisitante = [
   { k: ["banheiro", "toalete", "wc"], r: "🚻 O banheiro mais próximo fica ao lado do Palco Principal, a cerca de 80 m. Há outro bloco junto à Praça de Alimentação — este costuma ter fila menor agora." },
   { k: ["show", "agora", "palco", "música", "musica", "atração", "atracao"], r: "🎤 <strong>Agora:</strong> Forró da Lua no Palco Principal (começou às 21h00).<br/>⏭️ <strong>Próximo:</strong> Quadrilha Estrela do Norte, 22h15, na Arena Junina." },
   { k: ["vegetarian", "vegan", "salada"], r: "🥗 A barraca <strong>Sabor da Terra</strong> (ponto G7, Praça de Alimentação) é 100% vegetariana. O Milho da Vovó também tem opções sem carne. Quer que eu trace a rota?" },
@@ -266,6 +266,68 @@ const respostas = [
   { k: ["mapa", "onde fica", "localiza"], r: "🗺️ Abra a aba <strong>Mapa</strong> no app do visitante — todos os palcos, banheiros, barracas e estacionamentos estão marcados com navegação em tempo real." },
   { k: ["preço", "preco", "quanto custa", "valor", "plano"], r: "💼 A plataforma Just Go tem planos Start, Professional e Enterprise, dimensionados pelo porte do evento. Toque em <strong>Agendar Demonstração</strong> e nossa equipe apresenta a proposta ideal." },
 ];
+
+const AGENTS = {
+  visitante: {
+    nome: "Go AI", desc: "Assistente do Festival · online",
+    intro: "Olá! 👋 Sou a Go AI. Posso ajudar com shows, comida, banheiros, estacionamento e muito mais. Pergunte algo!",
+    chips: ["Qual show começa agora?", "Onde está o banheiro mais próximo?", "Qual barraca vende comida vegetariana?", "Qual estacionamento está mais vazio?"],
+    kb: respostasVisitante,
+    fallback: "🤖 Boa pergunta! Nesta demo eu respondo sobre <strong>shows, comida, banheiros, estacionamento e mapa</strong>. Na versão completa, sou treinada com todos os dados do seu evento.",
+  },
+  concierge: {
+    nome: "Agente Concierge", desc: "Turismo e hospedagem · online",
+    intro: "🤵 Bem-vindo! Sou o Concierge da Just Go. Posso encontrar hotel, restaurante, passeios e transporte na cidade durante o festival.",
+    chips: ["Reserve um hotel para hoje", "Onde jantar depois do show?", "Passeios para amanhã de manhã", "Como voltar para Parauapebas?"],
+    kb: [
+      { k: ["hotel", "hosped", "pousada", "reserv", "dormir"], r: "🏨 Encontrei 3 opções perto do evento para hoje:<br/>• <strong>Hotel Serra dos Carajás</strong> — R$ 280 · 1,2 km · ⭐ 4,6<br/>• <strong>Pousada Cidade Junina</strong> — R$ 160 · 800 m · ⭐ 4,3<br/>• <strong>Canaã Palace</strong> — R$ 340 · 2 km · ⭐ 4,8<br/>Quer que eu inicie a reserva? <em>(na versão completa, integro com Booking e Airbnb)</em>" },
+      { k: ["jantar", "restaurante", "comer fora", "janta"], r: "🍽️ Depois do show, recomendo: <strong>Sabor do Pará</strong> (regional, aberto até 1h, a 900 m) ou a própria <strong>Praça de Alimentação</strong> do festival, com 14 barracas até 0h. Posso reservar mesa no primeiro." },
+      { k: ["passeio", "turismo", "amanhã", "amanha", "conhecer"], r: "🌄 Para amanhã de manhã: trilha do <strong>Parque Nacional dos Campos Ferruginosos</strong> (saída 7h), city tour histórico de Canaã (9h) ou feira de artesanato regional no centro. Quer os contatos dos guias credenciados?" },
+      { k: ["voltar", "transporte", "taxi", "táxi", "uber", "ônibus", "onibus", "transfer"], r: "🚌 Para Parauapebas: transfer oficial do evento às 23h30 e 1h00 (R$ 25, saída do Estacionamento Norte) ou aplicativos de transporte — tempo estimado agora: 52 min." },
+    ],
+    fallback: "🤵 Como Concierge, cuido de <strong>hotéis, restaurantes, passeios e transporte</strong>. Na versão completa, faço reservas de verdade integrando Booking, Airbnb e parceiros locais.",
+  },
+  gestor: {
+    nome: "Agente Gestor", desc: "Operação do evento · tempo real",
+    intro: "📊 Central de operações na linha. Pergunte sobre ocupação, fluxo, equipes e receita — respondo com os dados ao vivo do evento.",
+    chips: ["Ocupação dos estacionamentos", "Quantos visitantes agora?", "Receita Go Pay de hoje", "Situação das equipes de campo"],
+    kb: [
+      { k: ["estacionamento", "ocupação", "ocupacao", "vaga"], r: "🚘 Ocupação agora: <strong>Norte 34%</strong> · <strong>Sul 87%</strong> · <strong>Leste 61%</strong>.<br/>📈 Previsão de lotação do Sul: 22h30. <strong>Recomendo</strong> redirecionar a sinalização para o Norte agora — quer que eu acione a equipe de tráfego?" },
+      { k: ["visitante", "público", "publico", "quantas pessoas", "fluxo"], r: "🧍 <strong>5.843 visitantes</strong> no recinto neste momento (+12% vs mesmo horário ontem). Pico previsto: <strong>7.900 às 22h10</strong>, puxado pelo show principal. Portões operando com fila média de 4 min." },
+      { k: ["receita", "go pay", "gopay", "faturamento", "vendas", "caixa"], r: "💳 Receita Go Pay hoje: <strong>R$ 412.300</strong> (68% alimentação, 22% expositores, 10% recargas). Ticket médio: R$ 41,20. Conciliação automática em dia — nenhuma pendência." },
+      { k: ["equipe", "segurança", "seguranca", "campo", "ocorrência", "ocorrencia", "médic"], r: "🎧 Equipes: 12 seguranças ativos, 4 brigadistas, 2 ambulâncias de prontidão. <strong>3 ocorrências abertas</strong> no setor G4 (som alto em barraca) — supervisor já acionado, SLA em 8 min." },
+    ],
+    fallback: "📊 Como Gestor, monitoro <strong>ocupação, fluxo, receita, equipes e ocorrências</strong> em tempo real. Na versão completa, também executo ações: acionar equipes, abrir portões e disparar avisos no app.",
+  },
+  analista: {
+    nome: "Agente Analista", desc: "Inteligência e relatórios",
+    intro: "📈 Sou o Analista da plataforma. Pergunte sobre resultados, indicadores e relatórios — trabalho com os dados da pesquisa do Festival Canaã.",
+    chips: ["Como foi o Festival Canaã?", "Qual foi o NPS do evento?", "Impacto no comércio local", "Gere o relatório executivo"],
+    kb: [
+      { k: ["como foi", "festival", "canaã", "canaa", "resultado", "balanço", "balanco"], r: "📊 <strong>Festival Canaã Cidade Junina — síntese:</strong><br/>• 1.647 entrevistas digitais (530 visitantes, 413 moradores, 253 comerciantes, 118 expositores)<br/>• Impacto econômico: <strong>R$ 8,2 mi</strong><br/>• Satisfação: <strong>94%</strong> · NPS 72<br/>• 46% do público de fora da cidade<br/>Quer o detalhamento por segmento ou o relatório executivo?" },
+      { k: ["nps", "satisfação", "satisfacao", "csat"], r: "⭐ <strong>NPS 72</strong> (zona de excelência) e <strong>CSAT 94%</strong>. Destaques positivos: programação (96%) e segurança (93%). Ponto de atenção: banheiros (81%) — recomendo +2 blocos no setor sul na próxima edição." },
+      { k: ["comércio", "comercio", "impacto", "econôm", "econom", "vendas"], r: "🏪 O comércio local reportou <strong>+38% de faturamento</strong> na semana do evento vs média do mês. 82% dos 253 comerciantes entrevistados avaliaram o impacto como positivo; hotelaria operou a 97% de ocupação. Isso sustenta a prestação de contas do investimento público." },
+      { k: ["relatório", "relatorio", "gere", "executivo", "slides", "apresentação", "apresentacao"], r: "📄 Gerando… pronto! <strong>Relatório Executivo (24 páginas)</strong>: metodologia, indicadores, SWOT, impacto econômico, satisfação por segmento e recomendações para a próxima edição — com anexo de evidências para os órgãos de controle. <em>(na versão completa, exporto em PDF e Power BI)</em>" },
+    ],
+    fallback: "📈 Como Analista, respondo com <strong>indicadores da pesquisa Canaã</strong> e gero relatórios. Na versão completa, cruzo qualquer base: pesquisas, Go Pay, fluxo e séries históricas.",
+  },
+};
+let currentAgent = "visitante";
+
+function setAgent(key) {
+  currentAgent = key;
+  const a = AGENTS[key];
+  document.getElementById("agentName").textContent = a.nome;
+  document.getElementById("agentDesc").textContent = a.desc;
+  chatChips.innerHTML = a.chips.map((c) => `<button>${c}</button>`).join("");
+  document.querySelectorAll("#agentPicker button").forEach((b) => b.classList.toggle("active", b.dataset.agent === key));
+  addMsg(a.intro, "bot");
+}
+
+document.getElementById("agentPicker").addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-agent]");
+  if (btn && btn.dataset.agent !== currentAgent) setAgent(btn.dataset.agent);
+});
 
 function addMsg(text, who) {
   const div = document.createElement("div");
@@ -277,12 +339,11 @@ function addMsg(text, who) {
 }
 
 function botReply(question) {
-  const typing = addMsg("Go AI está digitando…", "bot typing");
+  const agent = AGENTS[currentAgent];
+  const typing = addMsg(`${agent.nome} está digitando…`, "bot typing");
   const q = question.toLowerCase();
-  const found = respostas.find((r) => r.k.some((k) => q.includes(k)));
-  const answer = found
-    ? found.r
-    : "🤖 Boa pergunta! Nesta demo eu respondo sobre <strong>shows, comida, banheiros, estacionamento, mapa e emergências</strong>. Na versão completa, a Go AI é treinada com todos os dados do seu evento.";
+  const found = agent.kb.find((r) => r.k.some((k) => q.includes(k)));
+  const answer = found ? found.r : agent.fallback;
   setTimeout(() => {
     typing.remove();
     addMsg(answer, "bot");
