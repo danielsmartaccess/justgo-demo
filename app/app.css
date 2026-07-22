@@ -52,16 +52,16 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ══════════ LOGO (marca original sobre cartão branco) ══════════ */
 .splash-tile {
-  width: 150px; height: 150px; border-radius: 36px; background: #fff;
-  display: grid; place-items: center; padding: 18px;
+  width: 128px; height: 128px; border-radius: 30px; background: #fff;
+  display: grid; place-items: center; padding: 14px;
   box-shadow: 0 20px 60px rgba(0, 174, 239, .25);
 }
 .splash-tile img { width: 100%; height: 100%; object-fit: contain; }
 .header-brand {
   display: inline-flex; align-items: center; justify-content: center;
-  background: #fff; border-radius: 12px; padding: 5px 10px; height: 42px;
+  background: #fff; border-radius: 10px; padding: 4px 8px; height: 36px;
 }
-.header-brand img { height: 100%; width: auto; object-fit: contain; }
+.header-brand img { height: 28px; width: auto; object-fit: contain; }
 
 /* ══════════ SPLASH ══════════ */
 .splash {
@@ -74,7 +74,7 @@ button { font-family: inherit; cursor: pointer; }
 .splash-logo { position: relative; display: grid; place-items: center; animation: logoIn 1s ease both; }
 @keyframes logoIn { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }
 .splash-ring {
-  position: absolute; width: 230px; height: 230px; border-radius: 50%;
+  position: absolute; width: 188px; height: 188px; border-radius: 50%;
   border: 2px solid transparent;
   border-top-color: var(--gold); border-right-color: rgba(230,182,76,.25);
   animation: spin 1.4s linear infinite;
