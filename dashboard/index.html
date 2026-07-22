@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just Go · Dashboard do Gestor Municipal — Festival Canaã Cidade Junina</title>
+  <meta name="description" content="Centro de comando da Just Go Intelligence Platform: público, satisfação, Go Pay e briefing de IA em tempo real." />
+  <meta name="theme-color" content="#12283D" />
+  <link rel="icon" href="../assets/logo-justgo.avif" type="image/avif" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="dashboard.css?v=1" />
+</head>
+<body>
+
+<!-- ══════════ SPRITE DE ÍCONES (traçado estilo Lucide) ══════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="i-overview"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></g>
+    <g id="i-survey"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></g>
+    <g id="i-event"><path d="M8 2v4M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></g>
+    <g id="i-pay"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></g>
+    <g id="i-analytics"><path d="M18 20V10M12 20V4M6 20v-6"/></g>
+    <g id="i-report"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8M16 13H8M16 17H8"/></g>
+    <g id="i-brain"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/></g>
+    <g id="i-chevron-left"><path d="m15 18-6-6 6-6"/></g>
+    <g id="i-chevron-right"><path d="m9 18 6-6-6-6"/></g>
+    <g id="i-chevron-down"><path d="m6 9 6 6 6-6"/></g>
+    <g id="i-bell"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></g>
+    <g id="i-refresh"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></g>
+    <g id="i-thumb-up"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></g>
+    <g id="i-thumb-down"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></g>
+    <g id="i-external"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></g>
+    <g id="i-trend-up"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></g>
+    <g id="i-trend-down"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></g>
+    <g id="i-warning"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></g>
+    <g id="i-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></g>
+    <g id="i-plus"><path d="M5 12h14M12 5v14"/></g>
+    <g id="i-calendar"><path d="M8 2v4M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></g>
+    <g id="i-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>
+    <g id="i-back"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></g>
+  </defs>
+</svg>
+
+<div class="shell">
+
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="side-logo">
+      <span class="wordmark"><span class="wm-just">Just</span><span class="wm-go">&nbsp;Go</span></span>
+      <span class="wordmark-sub">Intelligence<br/>Platform</span>
+    </div>
+
+    <div class="side-divider"></div>
+
+    <nav class="side-nav" id="sideNav" aria-label="Módulos da plataforma">
+      <button type="button" data-nav="overview" class="active"><svg class="ic"><use href="#i-overview"/></svg><span class="nav-label">Visão Geral</span><i class="nav-dot"></i></button>
+      <button type="button" data-nav="survey"><svg class="ic"><use href="#i-survey"/></svg><span class="nav-label">Go Survey</span><i class="nav-dot"></i></button>
+      <button type="button" data-nav="event"><svg class="ic"><use href="#i-event"/></svg><span class="nav-label">Go Event</span><i class="nav-dot"></i></button>
+      <button type="button" data-nav="pay"><svg class="ic"><use href="#i-pay"/></svg><span class="nav-label">Go Pay</span><i class="nav-dot"></i></button>
+      <button type="button" data-nav="analytics"><svg class="ic"><use href="#i-analytics"/></svg><span class="nav-label">Go Analytics</span><i class="nav-dot"></i></button>
+      <button type="button" data-nav="report"><svg class="ic"><use href="#i-report"/></svg><span class="nav-label">Go Report</span><i class="nav-dot"></i></button>
+      <button type="button" data-nav="intelligence"><svg class="ic"><use href="#i-brain"/></svg><span class="nav-label">GO Intelligence</span><i class="nav-dot"></i></button>
+    </nav>
+
+    <div class="side-foot">
+      <a class="side-back" href="../" title="Voltar para o site"><svg class="ic"><use href="#i-back"/></svg><span class="nav-label">Voltar ao site</span></a>
+      <button type="button" class="side-toggle" id="btnCollapse" aria-label="Recolher menu" aria-expanded="true">
+        <svg class="ic"><use href="#i-chevron-left"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ══════════ COLUNA PRINCIPAL ══════════ -->
+  <div class="main">
+
+    <!-- ── Top bar ── -->
+    <header class="topbar">
+      <button type="button" class="event-picker">
+        <svg class="ic ic-blue"><use href="#i-event"/></svg>
+        <span>Festival Canaã Cidade Junina 2027</span>
+        <svg class="ic ic-dim"><use href="#i-chevron-down"/></svg>
+      </button>
+
+      <div class="live"><i class="live-dot"></i><span id="liveStamp">atualizado há 32s</span></div>
+
+      <div class="spacer"></div>
+
+      <div class="seg" id="viewToggle" role="group" aria-label="Alternar estado da demonstração">
+        <button type="button" data-view="dashboard" class="active">Com evento</button>
+        <button type="button" data-view="empty">Sem evento</button>
+      </div>
+
+      <div class="bell-wrap">
+        <button type="button" class="icon-btn" id="btnBell" aria-label="Notificações" aria-expanded="false">
+          <svg class="ic"><use href="#i-bell"/></svg><i class="bell-dot"></i>
+        </button>
+        <div class="bell-pop" id="bellPop" hidden>
+          <p class="pop-title">NOTIFICAÇÕES</p>
+          <div class="pop-item">
+            <svg class="ic ic-gold"><use href="#i-warning"/></svg>
+            <div><p>Satisfação abaixo de 90% no Setor Kids</p><small>há 2min</small></div>
+          </div>
+          <div class="pop-item">
+            <svg class="ic ic-gold"><use href="#i-warning"/></svg>
+            <div><p>Pico de transações Go Pay detectado</p><small>há 8min</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="avatar">AS</div>
+    </header>
+
+    <!-- ── Conteúdo: com evento ── -->
+    <div class="content" id="viewDashboard">
+
+      <div class="page-head">
+        <div>
+          <h1>Visão Geral</h1>
+          <p>Festival Canaã Cidade Junina 2027 · Dia 3 de 7</p>
+        </div>
+        <div class="page-actions">
+          <button type="button" class="btn btn-quiet"><svg class="ic"><use href="#i-refresh"/></svg>Atualizar</button>
+          <button type="button" class="btn btn-primary"><svg class="ic"><use href="#i-users"/></svg>Painel ao vivo</button>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="card kpi">
+          <p class="kpi-label">Público estimado</p>
+          <p class="kpi-value">48.200</p>
+          <div class="kpi-foot"><span class="chip up"><svg class="ic"><use href="#i-trend-up"/></svg>+3,2%</span><small>vs. edição anterior</small></div>
+        </div>
+        <div class="card kpi">
+          <p class="kpi-label">Entrevistas</p>
+          <p class="kpi-value">1.647</p>
+          <div class="kpi-foot"><span class="chip up"><svg class="ic"><use href="#i-trend-up"/></svg>+12,5%</span><small>últimas 24h</small></div>
+        </div>
+        <div class="card kpi">
+          <p class="kpi-label">Satisfação</p>
+          <p class="kpi-value">94%</p>
+          <div class="kpi-foot"><span class="chip down"><svg class="ic"><use href="#i-trend-down"/></svg>-0,8%</span><small>índice NPS ajustado</small></div>
+        </div>
+        <div class="card kpi">
+          <p class="kpi-label">Volume Go Pay</p>
+          <p class="kpi-value">R$ 2,4 mi</p>
+          <div class="kpi-foot"><span class="chip up"><svg class="ic"><use href="#i-trend-up"/></svg>+18,4%</span><small>transações aprovadas</small></div>
+        </div>
+        <div class="card kpi">
+          <p class="kpi-label">Ticket médio</p>
+          <p class="kpi-value">R$ 38,50</p>
+          <div class="kpi-foot"><span class="chip up"><svg class="ic"><use href="#i-trend-up"/></svg>+4,1%</span><small>por consumidor</small></div>
+        </div>
+      </div>
+
+      <!-- Briefing de IA + Alertas -->
+      <div class="row row-briefing">
+        <section class="card briefing" aria-labelledby="briefTitle">
+          <div class="card-head">
+            <div class="brief-id">
+              <span class="brief-icon"><svg class="ic"><use href="#i-brain"/></svg></span>
+              <div>
+                <p class="card-title" id="briefTitle">Briefing do dia — GO Intelligence</p>
+                <p class="card-sub">Gerado às 07:48 · Festival Canaã Cidade Junina 2027</p>
+              </div>
+            </div>
+            <span class="tag-ia">IA</span>
+          </div>
+
+          <ol class="insights">
+            <li><span class="ins-n">1</span><p>O público do setor Gastronômico cresceu 22% em relação à edição de 2026, com maior concentração no período das 18h às 21h — recomenda-se reforço de equipe nesse intervalo.</p></li>
+            <li><span class="ins-n">2</span><p>As entrevistas Go Survey indicam que 68% dos visitantes chegaram via transporte público, sinalizando oportunidade para expansão de pontos de apoio próximos às paradas de ônibus.</p></li>
+            <li><span class="ins-n">3</span><p>Volume de vendas no Go Pay superou a meta diária em 34%. Ticket médio de R$ 38,50 está 8% acima da projeção, puxado pelo segmento de bebidas artesanais.</p></li>
+          </ol>
+
+          <div class="card-foot">
+            <button type="button" class="btn btn-ia"><svg class="ic"><use href="#i-external"/></svg>Ver fontes</button>
+            <div class="feedback">
+              <span>Este briefing foi útil?</span>
+              <button type="button" class="fb fb-up" data-fb="up" aria-label="Briefing útil" aria-pressed="false"><svg class="ic"><use href="#i-thumb-up"/></svg></button>
+              <button type="button" class="fb fb-down" data-fb="down" aria-label="Briefing não útil" aria-pressed="false"><svg class="ic"><use href="#i-thumb-down"/></svg></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card alerts" aria-labelledby="alertsTitle">
+          <div class="card-head">
+            <div class="brief-id">
+              <svg class="ic ic-gold"><use href="#i-warning"/></svg>
+              <p class="card-title" id="alertsTitle">Alertas operacionais</p>
+            </div>
+            <span class="tag-warn">2 ativos</span>
+          </div>
+          <div class="alert-list">
+            <div class="alert-item">
+              <span class="alert-ico warn"><svg class="ic"><use href="#i-warning"/></svg></span>
+              <div>
+                <p class="alert-title">Capacidade próxima ao limite</p>
+                <p class="alert-desc">Setor Arena Kids atingiu 91% da capacidade máxima. Avalie desvio de fluxo.</p>
+                <small>há 5 min</small>
+              </div>
+            </div>
+            <div class="alert-item">
+              <span class="alert-ico info"><svg class="ic"><use href="#i-info"/></svg></span>
+              <div>
+                <p class="alert-title">Queda de sinal Go Survey</p>
+                <p class="alert-desc">3 coletores offline no Palco Principal. Sincronização pendente de 47 entrevistas.</p>
+                <small>há 18 min</small>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <button type="button" class="btn btn-quiet btn-block">Ver todos os alertas</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Gráfico + Tabela -->
+      <div class="row row-chart">
+        <section class="card chart-card" aria-labelledby="chartTitle">
+          <div class="card-head">
+            <div>
+              <p class="card-title" id="chartTitle">Vendas por área</p>
+              <p class="card-sub">Itens vendidos por categoria · hoje</p>
+            </div>
+            <div class="legend">
+              <span><i style="background:#00AEEF"></i>Alimentação</span>
+              <span><i style="background:#0D1B2A"></i>Bebidas</span>
+              <span><i style="background:#E6B64C"></i>Artesanato</span>
+            </div>
+          </div>
+          <div class="chart-box">
+            <svg id="salesChart" role="img" aria-label="Gráfico de barras de itens vendidos por área e categoria"></svg>
+            <div class="chart-tip" id="chartTip" hidden></div>
+          </div>
+        </section>
+
+        <section class="card table-card" aria-labelledby="tableTitle">
+          <div class="card-head col">
+            <p class="card-title" id="tableTitle">Top vendedores</p>
+            <p class="card-sub">Por faturamento · acumulado</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Vendedor</th><th>Categoria</th><th class="ta-r">Transações</th><th class="ta-r">Faturamento</th><th class="ta-r">Var.</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="v-name">Sabores do Sertão</td><td><span class="pill food">Alimentação</span></td><td class="ta-r num">487</td><td class="ta-r num strong">R$ 23.840</td><td class="ta-r var up">+14%</td></tr>
+                <tr><td class="v-name">Cerveja Artesanal Nordeste</td><td><span class="pill drink">Bebidas</span></td><td class="ta-r num">312</td><td class="ta-r num strong">R$ 18.720</td><td class="ta-r var up">+9%</td></tr>
+                <tr><td class="v-name">Arte &amp; Tradição</td><td><span class="pill craft">Artesanato</span></td><td class="ta-r num">198</td><td class="ta-r num strong">R$ 11.260</td><td class="ta-r var up">+22%</td></tr>
+                <tr><td class="v-name">Churrasco da Roça</td><td><span class="pill food">Alimentação</span></td><td class="ta-r num">267</td><td class="ta-r num strong">R$ 9.870</td><td class="ta-r var down">-3%</td></tr>
+                <tr><td class="v-name">Limonada Baiana</td><td><span class="pill drink">Bebidas</span></td><td class="ta-r num">443</td><td class="ta-r num strong">R$ 8.420</td><td class="ta-r var up">+31%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ── Conteúdo: sem evento ── -->
+    <div class="content empty" id="viewEmpty" hidden>
+      <svg class="empty-art" width="160" height="140" viewBox="0 0 160 140" fill="none" aria-hidden="true">
+        <circle cx="80" cy="70" r="60" fill="#EDF4FB"/>
+        <rect x="32" y="38" width="96" height="76" rx="10" fill="#fff" stroke="#DCE3EA" stroke-width="1.5"/>
+        <path d="M32 48a10 10 0 0 1 10-10h76a10 10 0 0 1 10 10v18H32V48Z" fill="#12283D"/>
+        <rect x="54" y="30" width="6" height="16" rx="3" fill="#00AEEF"/>
+        <rect x="100" y="30" width="6" height="16" rx="3" fill="#00AEEF"/>
+        <rect x="64" y="47" width="32" height="5" rx="2.5" fill="rgba(255,255,255,.4)"/>
+        <g id="emptyDots"></g>
+        <circle cx="26" cy="28" r="4" fill="#E6B64C" opacity=".7"/>
+        <circle cx="138" cy="100" r="5" fill="#6E5BD9" opacity=".5"/>
+        <circle cx="18" cy="90" r="3" fill="#00AEEF" opacity=".4"/>
+        <circle cx="118" cy="44" r="12" fill="#00AEEF"/>
+        <rect x="114" y="43" width="8" height="2" rx="1" fill="#fff"/>
+        <rect x="117" y="40" width="2" height="8" rx="1" fill="#fff"/>
+      </svg>
+
+      <h2>Nenhum evento ativo</h2>
+      <p class="empty-copy">Crie um novo evento para começar a coletar dados de público, monitorar vendas e gerar inteligência em tempo real com a plataforma Just Go.</p>
+
+      <div class="empty-actions">
+        <button type="button" class="btn btn-primary btn-lg" id="btnCreate"><svg class="ic"><use href="#i-plus"/></svg>Criar evento</button>
+        <button type="button" class="btn btn-outline btn-lg"><svg class="ic ic-dim"><use href="#i-calendar"/></svg>Ver eventos anteriores</button>
+      </div>
+
+      <div class="card teaser">
+        <div><p class="teaser-v">12</p><p class="teaser-l">Eventos realizados</p></div>
+        <span class="teaser-sep"></span>
+        <div><p class="teaser-v">248k</p><p class="teaser-l">Visitantes captados</p></div>
+        <span class="teaser-sep"></span>
+        <div><p class="teaser-v">R$ 14,2mi</p><p class="teaser-l">Volume movimentado</p></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<p class="demo-note">Demonstração com dados fictícios · Just Go Intelligence Platform</p>
+
+<script src="dashboard.js?v=1"></script>
+</body>
+</html>

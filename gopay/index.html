@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just Go · Go Pay — Carteira do Visitante e Painel Financeiro</title>
+  <meta name="description" content="Go Pay: carteira digital do visitante e painel financeiro do evento — recarga Pix, pagamento por QR, conciliação e trilha de auditoria." />
+  <meta name="theme-color" content="#06090D" />
+  <link rel="icon" href="../assets/logo-justgo.avif" type="image/avif" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="gopay.css?v=1" />
+</head>
+<body>
+
+<!-- ══════════ SPRITE DE ÍCONES ══════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="i-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></g>
+    <g id="i-copy"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></g>
+    <g id="i-check"><path d="M20 6 9 17l-5-5"/></g>
+    <g id="i-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></g>
+    <g id="i-bell"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></g>
+    <g id="i-refresh"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></g>
+    <g id="i-warning"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></g>
+    <g id="i-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></g>
+    <g id="i-logout"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></g>
+    <g id="i-chart"><path d="M18 20V10M12 20V4M6 20v-6"/></g>
+    <g id="i-file"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8M16 13H8M16 17H8"/></g>
+    <g id="i-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></g>
+    <g id="i-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>
+    <g id="i-x"><path d="M18 6 6 18M6 6l12 12"/></g>
+    <g id="i-clock"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g>
+    <g id="i-zap"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></g>
+    <g id="i-chevron-right"><path d="m9 18 6-6-6-6"/></g>
+    <g id="i-back"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></g>
+  </defs>
+</svg>
+
+<!-- ══════════ CABEÇALHO DA DEMO ══════════ -->
+<header class="demo-head">
+  <a class="back-link" href="../"><svg class="ic"><use href="#i-back"/></svg>Voltar ao site</a>
+
+  <div class="brand">
+    <span class="brand-mark"><svg class="ic ic-fill"><use href="#i-zap"/></svg></span>
+    <span class="brand-name">Go Pay</span>
+    <span class="brand-sub">· Just Go Intelligence Platform</span>
+  </div>
+
+  <div class="seg" id="viewToggle" role="group" aria-label="Alternar interface">
+    <button type="button" data-view="wallet" class="active">📱 Carteira do Visitante</button>
+    <button type="button" data-view="panel">🖥 Painel Financeiro</button>
+  </div>
+
+  <div class="screen-picker" id="screenPicker" role="group" aria-label="Escolher tela da carteira">
+    <button type="button" data-screen="home" class="active">Início</button>
+    <button type="button" data-screen="recharge">Recarga Pix</button>
+    <button type="button" data-screen="pixcode">Código Pix</button>
+    <button type="button" data-screen="qrpay">Meu QR</button>
+    <button type="button" data-screen="refund">Resgatar</button>
+    <button type="button" data-screen="refund_ok">Confirmação</button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════
+     CARTEIRA DO VISITANTE (mobile)
+     ══════════════════════════════════════════════════ -->
+<div class="stage" id="viewWallet">
+  <div class="phone">
+    <div class="statusbar">
+      <span class="clock">9:41</span>
+      <div class="sb-icons">
+        <svg width="17" height="12" viewBox="0 0 17 12" aria-hidden="true">
+          <rect x="1" y="5" width="3" height="7" rx="1.5" fill="#F2F5F8" fill-opacity=".35"/>
+          <rect x="6" y="3" width="3" height="9" rx="1.5" fill="#F2F5F8" fill-opacity=".6"/>
+          <rect x="11" y="1" width="3" height="11" rx="1.5" fill="#F2F5F8"/>
+        </svg>
+        <svg width="16" height="13" viewBox="0 0 16 13" fill="none" aria-hidden="true">
+          <circle cx="8" cy="11" r="1.5" fill="#F2F5F8"/>
+          <path d="M4.2 7.3C5.3 6.2 6.6 5.5 8 5.5s2.7.7 3.8 1.8" stroke="#F2F5F8" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M1.5 4.5C3.3 2.8 5.5 1.5 8 1.5s4.7 1.3 6.5 3" stroke="#F2F5F8" stroke-width="1.4" stroke-linecap="round" stroke-opacity=".55"/>
+        </svg>
+        <span class="battery"><i></i></span>
+      </div>
+    </div>
+    <div class="island-wrap"><div class="island"></div></div>
+
+    <div class="screens" id="screens">
+
+      <!-- ── Início ── -->
+      <section class="scr scr-pad-nav" data-scr="home">
+        <div class="w-head">
+          <div class="w-user">
+            <span class="w-ava">V</span>
+            <div><p class="w-kicker">BEM-VINDO</p><p class="w-band">Pulseira #A4812</p></div>
+          </div>
+          <button type="button" class="w-bell" aria-label="Notificações"><svg class="ic"><use href="#i-bell"/></svg><i></i></button>
+        </div>
+
+        <div class="bal-card">
+          <span class="glow glow-gold"></span><span class="glow glow-blue"></span>
+          <p class="bal-label">Saldo disponível</p>
+          <p class="bal-amount"><span class="cur">R$</span><span class="int">84</span><span class="dec">,50</span></p>
+          <p class="bal-event">Festival Junino SP 2025</p>
+          <div class="hr"></div>
+          <div class="bal-split">
+            <div><p class="mini-label">Recarregado</p><p class="mini-val">R$ 150,00</p></div>
+            <div class="ta-r"><p class="mini-label">Consumido</p><p class="mini-val">R$ 65,50</p></div>
+          </div>
+        </div>
+
+        <div class="w-actions">
+          <button type="button" class="btn-gold" data-go="recharge">Recarregar</button>
+          <button type="button" class="btn-blue-out" data-go="qrpay">Meu QR</button>
+        </div>
+
+        <div class="pts">
+          <div><p class="mini-label">Go Pay Pontos</p><p class="pts-val">845 pts</p></div>
+          <span class="pts-cta">Ver recompensas <svg class="ic ic-xs"><use href="#i-chevron-right"/></svg></span>
+        </div>
+
+        <p class="w-kicker mb12">ÚLTIMAS TRANSAÇÕES</p>
+        <div class="txns">
+          <div class="txn"><div><p class="txn-l">Barraca do João</p><p class="txn-t">18:45</p></div><p class="txn-v">− R$ 23,00</p></div>
+          <div class="txn"><div><p class="txn-l">Bar da Praia</p><p class="txn-t">16:22</p></div><p class="txn-v">− R$ 18,50</p></div>
+          <div class="txn"><div><p class="txn-l">Recarga via Pix</p><p class="txn-t">14:10</p></div><p class="txn-v credit">+ R$ 100,00</p></div>
+          <div class="txn"><div><p class="txn-l">Praça de Alimentação Norte</p><p class="txn-t">12:35</p></div><p class="txn-v">− R$ 24,00</p></div>
+        </div>
+
+        <button type="button" class="btn-ghost-w" data-go="refund">Resgatar saldo restante →</button>
+      </section>
+
+      <!-- ── Recarga Pix ── -->
+      <section class="scr" data-scr="recharge" hidden>
+        <div class="scr-head"><button type="button" class="icon-plain" data-go="home" aria-label="Voltar"><svg class="ic ic-lg"><use href="#i-arrow-left"/></svg></button><h2>Recarregar via Pix</h2></div>
+        <p class="scr-lead">Escolha um valor para recarregar</p>
+
+        <div class="presets" id="presets">
+          <button type="button" data-amt="20">R$ 20,00</button>
+          <button type="button" data-amt="50" class="on">R$ 50,00</button>
+          <button type="button" data-amt="100">R$ 100,00</button>
+          <button type="button" data-amt="150">R$ 150,00</button>
+          <button type="button" data-amt="200">R$ 200,00</button>
+          <button type="button" data-amt="-1" class="other">Outro valor</button>
+        </div>
+
+        <div id="customAmt" hidden><input type="text" inputmode="decimal" placeholder="R$ 0,00" class="w-input" aria-label="Outro valor" /></div>
+
+        <div class="note note-blue">O código Pix será gerado automaticamente. Válido por 10 minutos após a geração.</div>
+
+        <button type="button" class="btn-gold btn-w-block" id="btnGenPix" data-go="pixcode">Gerar código Pix</button>
+      </section>
+
+      <!-- ── Código Pix ── -->
+      <section class="scr" data-scr="pixcode" hidden>
+        <div class="scr-head"><button type="button" class="icon-plain" data-go="recharge" aria-label="Voltar"><svg class="ic ic-lg"><use href="#i-arrow-left"/></svg></button><h2>Código Pix</h2></div>
+
+        <div class="ta-c mb22">
+          <p class="w-kicker">VALOR DA RECARGA</p>
+          <p class="pix-amount">R$ <span id="pixAmt">50</span>,00</p>
+        </div>
+
+        <div class="card-w ta-c mb18">
+          <div class="await"><span class="dot-green"></span>Aguardando pagamento</div>
+          <p class="countdown" id="countdown">9:32</p>
+          <p class="w-sub" id="countdownSub">Válido por 9:32</p>
+        </div>
+
+        <div class="card-w mb14">
+          <p class="w-kicker mb10">PIX COPIA E COLA</p>
+          <p class="pix-code" id="pixCode"></p>
+          <button type="button" class="btn-copy" id="btnCopy"><svg class="ic ic-sm"><use href="#i-copy"/></svg><span>Copiar código</span></button>
+        </div>
+
+        <p class="w-foot">Abra o app do seu banco e use a opção Pix Copia e Cola para pagar.</p>
+      </section>
+
+      <!-- ── Meu QR ── -->
+      <section class="scr scr-pad-nav" data-scr="qrpay" hidden>
+        <div class="scr-head between"><h2>Meu QR Code</h2><button type="button" class="icon-plain" data-go="home" aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+        <p class="w-foot mb20">Apresente este código na barraca para pagar</p>
+
+        <div class="card-w qr-card">
+          <div class="ta-c mb16"><p class="w-sub">Pulseira</p><p class="qr-band">#A4812</p></div>
+          <div class="qr-holder"><svg id="qrSvg" width="184" height="184" viewBox="0 0 184 184" role="img" aria-label="QR Code da pulseira A4812"></svg></div>
+          <div class="hr full"></div>
+          <p class="w-sub">Saldo disponível</p>
+          <p class="qr-bal">R$ 84,50</p>
+        </div>
+
+        <div class="note note-blue ta-c">Aproxime da leitora ou mostre ao operador da barraca</div>
+        <button type="button" class="btn-ghost-w center"><svg class="ic ic-sm"><use href="#i-refresh"/></svg>Atualizar QR Code</button>
+      </section>
+
+      <!-- ── Resgatar ── -->
+      <section class="scr" data-scr="refund" hidden>
+        <div class="scr-head"><button type="button" class="icon-plain" data-go="home" aria-label="Voltar"><svg class="ic ic-lg"><use href="#i-arrow-left"/></svg></button><h2>Resgatar saldo restante</h2></div>
+
+        <div class="card-w mb22">
+          <p class="w-kicker">SALDO A RESGATAR</p>
+          <p class="refund-amount">R$ 84,50</p>
+          <div class="hr"></div>
+          <p class="w-note">O valor será transferido via Pix para a chave informada em até 3 dias úteis após o encerramento do evento.</p>
+        </div>
+
+        <p class="w-label">Tipo de chave Pix</p>
+        <div class="keytypes" id="keyTypes">
+          <button type="button" data-key="cpf" class="on">CPF</button>
+          <button type="button" data-key="email">E-mail</button>
+          <button type="button" data-key="tel">Telefone</button>
+          <button type="button" data-key="random">Aleatória</button>
+        </div>
+
+        <p class="w-label" id="keyLabel">CPF</p>
+        <input type="text" id="pixKey" class="w-input mb18" value="123.456.789-00" placeholder="000.000.000-00" aria-labelledby="keyLabel" />
+
+        <div class="note note-gold">Verifique os dados antes de confirmar. O resgate não poderá ser cancelado após a solicitação.</div>
+
+        <button type="button" class="btn-blue btn-w-block" id="btnRefund" data-go="refund_ok">Solicitar resgate</button>
+      </section>
+
+      <!-- ── Confirmação ── -->
+      <section class="scr scr-ok" data-scr="refund_ok" hidden>
+        <span class="ok-ring"><svg class="ic ic-xl"><use href="#i-check"/></svg></span>
+        <h2>Resgate solicitado!</h2>
+        <p class="ok-copy">O valor de <b>R$ 84,50</b> será transferido para sua chave Pix em até 3 dias úteis após o encerramento do evento.</p>
+
+        <div class="card-w w-full mb22">
+          <div class="kv"><p>Protocolo</p><p>#RPX-20250615-00847</p></div>
+          <div class="kv"><p>Valor</p><p>R$ 84,50</p></div>
+          <div class="kv"><p>Chave Pix</p><p id="okKey">123.456.789-00</p></div>
+          <div class="kv"><p>Prazo</p><p>Até 3 dias úteis</p></div>
+        </div>
+
+        <button type="button" class="btn-card-w" data-go="home">Voltar ao início</button>
+      </section>
+    </div>
+
+    <nav class="bottomnav" id="bottomnav">
+      <button type="button" data-go="home" class="on"><span>⌂</span>Início</button>
+      <button type="button" data-go="qrpay"><span>⬛</span>Meu QR</button>
+      <button type="button" class="off"><span>≡</span>Histórico</button>
+      <button type="button" class="off"><span>⚙</span>Config</button>
+    </nav>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     PAINEL FINANCEIRO (organizador)
+     ══════════════════════════════════════════════════ -->
+<div class="stage panel-stage" id="viewPanel" hidden>
+  <div class="panel">
+
+    <aside class="p-side">
+      <div class="p-brand">
+        <span class="p-mark"><svg class="ic ic-fill"><use href="#i-zap"/></svg></span>
+        <div><p class="p-brand-name">Go Pay</p><p class="p-brand-sub">Just Go Platform</p></div>
+      </div>
+
+      <div class="p-event">
+        <p class="p-kicker">EVENTO ATIVO</p>
+        <p class="p-event-name">Festival Junino SP 2025</p>
+        <p class="p-event-meta">14–17 jun · Parque da Independência</p>
+      </div>
+
+      <nav class="p-nav" id="pNav">
+        <button type="button" class="active"><svg class="ic ic-sm"><use href="#i-chart"/></svg>Painel Financeiro</button>
+        <button type="button"><svg class="ic ic-sm"><use href="#i-refresh"/></svg>Recargas</button>
+        <button type="button"><svg class="ic ic-sm"><use href="#i-users"/></svg>Barracas</button>
+        <button type="button"><svg class="ic ic-sm"><use href="#i-file"/></svg>Relatórios</button>
+        <button type="button"><svg class="ic ic-sm"><use href="#i-clock"/></svg>Auditoria</button>
+        <button type="button"><svg class="ic ic-sm"><use href="#i-settings"/></svg>Configurações</button>
+      </nav>
+
+      <div class="p-user">
+        <div class="p-user-row"><span class="p-ava">M</span><div><p class="p-user-name">M. Silva</p><p class="p-user-role">Gestor Municipal</p></div></div>
+        <button type="button" class="p-logout"><svg class="ic ic-sm"><use href="#i-logout"/></svg>Sair</button>
+      </div>
+    </aside>
+
+    <main class="p-main">
+      <div class="p-top">
+        <div><h1>Painel Financeiro</h1><p>Festival Junino SP 2025 · Atualizado 16/06 às 09:45</p></div>
+        <div class="p-top-actions">
+          <button type="button" class="p-btn"><svg class="ic ic-sm"><use href="#i-download"/></svg>Exportar</button>
+          <span class="p-bell"><svg class="ic"><use href="#i-bell"/></svg><i></i></span>
+        </div>
+      </div>
+
+      <div class="p-body">
+        <div class="banner banner-bad" id="divBanner">
+          <div class="banner-l">
+            <svg class="ic"><use href="#i-warning"/></svg>
+            <div><p class="banner-t">Divergência de R$ 312,00 encontrada — ver detalhes</p><p class="banner-s">Food Truck Gourmet · Detectada em 15/06 às 22:31</p></div>
+          </div>
+          <div class="banner-r">
+            <button type="button" class="banner-btn">Ver detalhes</button>
+            <button type="button" class="banner-x" id="dismissDiv" aria-label="Dispensar aviso"><svg class="ic ic-sm"><use href="#i-x"/></svg></button>
+          </div>
+        </div>
+
+        <div class="banner banner-ok">
+          <svg class="ic"><use href="#i-shield"/></svg>
+          <p class="banner-t">Conciliação de 15/jun fechada sem divergências</p>
+          <span class="banner-s">· Aprovada por A. Santos em 16/06 às 08:45</span>
+        </div>
+
+        <div class="p-kpis">
+          <div class="p-kpi"><i style="background:#00AEEF"></i><p class="p-kpi-l">Volume bruto</p><p class="p-kpi-v">R$ 2.412.380</p><p class="p-kpi-s">+12,4% vs. edição anterior</p></div>
+          <div class="p-kpi"><i style="background:#34D399"></i><p class="p-kpi-l">Recargas</p><p class="p-kpi-v">R$ 2.610.000</p><p class="p-kpi-s">6.729 operações realizadas</p></div>
+          <div class="p-kpi"><i style="background:#E6B64C"></i><p class="p-kpi-l">Saldo não consumido</p><p class="p-kpi-v">R$ 197.620</p><p class="p-kpi-s">7,6% do total recarregado</p></div>
+          <div class="p-kpi"><i style="background:#A78BFA"></i><p class="p-kpi-l">Ticket médio</p><p class="p-kpi-v">R$ 38,50</p><p class="p-kpi-s">Por visitante / por evento</p></div>
+        </div>
+
+        <div class="p-row">
+          <div class="p-card">
+            <div class="p-card-head">
+              <div><h3>Volume por hora</h3><p>15/jun · Transações em R$</p></div>
+              <div class="p-tabs"><button type="button" class="on">Hoje</button><button type="button">Ontem</button><button type="button">Semana</button></div>
+            </div>
+            <div class="p-chart-box">
+              <svg id="hourChart" role="img" aria-label="Gráfico de linha do volume transacionado por hora"></svg>
+              <div class="p-tip" id="hourTip" hidden></div>
+            </div>
+          </div>
+
+          <div class="p-card p-audit">
+            <div class="p-card-head"><h3>Trilha de Auditoria</h3><svg class="ic ic-sm ic-muted"><use href="#i-clock"/></svg></div>
+            <div class="p-audit-list" id="auditList"></div>
+          </div>
+        </div>
+
+        <div class="p-card p-table-card">
+          <div class="p-card-head">
+            <div><h3>Breakdown por Barraca</h3><p>Festival Junino SP 2025 · 14–17 jun</p></div>
+            <button type="button" class="p-btn small"><svg class="ic ic-xs"><use href="#i-download"/></svg>Exportar CSV</button>
+          </div>
+          <div class="p-table-wrap">
+            <table>
+              <thead><tr><th>Barraca</th><th>Categoria</th><th class="ta-r">Recargas</th><th class="ta-r">Consumo</th><th class="ta-r">Saldo restante</th><th>Status</th></tr></thead>
+              <tbody id="vendorRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<p class="demo-note">Demonstração com dados fictícios · Go Pay · Just Go Intelligence Platform</p>
+
+<script src="gopay.js?v=1"></script>
+</body>
+</html>
