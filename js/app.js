@@ -138,10 +138,10 @@ const screens = {
           <path d="M118 0 L 122 190" stroke="#cbd5e1" stroke-width="8"/>
           <rect x="18" y="20" width="76" height="58" rx="8" fill="#dbeafe"/>
           <rect x="146" y="120" width="76" height="52" rx="8" fill="#fde9d0"/>
-          <rect x="20" y="122" width="60" height="46" rx="8" fill="#e2e8f0"/>
+          <rect x="20" y="122" width="60" height="46" rx="8" fill="#DCE3EA"/>
           ${mapPins.map((p, i) => `
             <g class="map-pin" data-pin="${i}" transform="translate(${p.x},${p.y})">
-              <circle r="13" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+              <circle r="13" fill="white" stroke="#00AEEF" stroke-width="1.5"/>
               <text y="5" text-anchor="middle" font-size="13">${p.ico}</text>
             </g>`).join("")}
         </svg>
@@ -219,8 +219,8 @@ function drawSpark() {
     })
     .join(" ");
   svg.innerHTML = `
-    <polyline points="${pts}" fill="none" stroke="#2563eb" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-    <polygon points="0,48 ${pts} 200,48" fill="rgba(37,99,235,.10)" stroke="none"/>`;
+    <polyline points="${pts}" fill="none" stroke="#00AEEF" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <polygon points="0,48 ${pts} 200,48" fill="rgba(0,174,239,.10)" stroke="none"/>`;
 }
 
 function buildHeatmap() {
@@ -404,7 +404,7 @@ function drawFlowChart(day) {
     const lbl = document.createElementNS(NS, "text");
     lbl.setAttribute("x", padL - 8); lbl.setAttribute("y", gy + 4);
     lbl.setAttribute("text-anchor", "end"); lbl.setAttribute("font-size", "11");
-    lbl.setAttribute("fill", "#94a3b8");
+    lbl.setAttribute("fill", "#9BAAB8");
     lbl.textContent = v >= 1000 ? v / 1000 + " mil" : v;
     svg.appendChild(lbl);
   });
@@ -413,12 +413,12 @@ function drawFlowChart(day) {
   const pts = vals.map((v, i) => `${x(i)},${y(v)}`).join(" ");
   const area = document.createElementNS(NS, "polygon");
   area.setAttribute("points", `${padL},${y(0)} ${pts} ${x(vals.length - 1)},${y(0)}`);
-  area.setAttribute("fill", "rgba(37,99,235,.08)");
+  area.setAttribute("fill", "rgba(0,174,239,.08)");
   svg.appendChild(area);
   const line = document.createElementNS(NS, "polyline");
   line.setAttribute("points", pts);
   line.setAttribute("fill", "none");
-  line.setAttribute("stroke", "#2563eb");
+  line.setAttribute("stroke", "#00AEEF");
   line.setAttribute("stroke-width", "2.5");
   line.setAttribute("stroke-linejoin", "round");
   line.setAttribute("stroke-linecap", "round");
@@ -429,13 +429,13 @@ function drawFlowChart(day) {
     const lbl = document.createElementNS(NS, "text");
     lbl.setAttribute("x", x(i)); lbl.setAttribute("y", H - 10);
     lbl.setAttribute("text-anchor", "middle"); lbl.setAttribute("font-size", "11.5");
-    lbl.setAttribute("fill", "#64748b");
+    lbl.setAttribute("fill", "#6B7A8D");
     lbl.textContent = hours[i];
     svg.appendChild(lbl);
 
     const dot = document.createElementNS(NS, "circle");
     dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(v)); dot.setAttribute("r", "4.5");
-    dot.setAttribute("fill", "#fff"); dot.setAttribute("stroke", "#2563eb"); dot.setAttribute("stroke-width", "2");
+    dot.setAttribute("fill", "#fff"); dot.setAttribute("stroke", "#00AEEF"); dot.setAttribute("stroke-width", "2");
     svg.appendChild(dot);
 
     const hit = document.createElementNS(NS, "circle");
@@ -475,7 +475,7 @@ function drawOriginChart() {
     bar.setAttribute("x", padL); bar.setAttribute("y", yy);
     bar.setAttribute("width", Math.max(bw, 4)); bar.setAttribute("height", 24);
     bar.setAttribute("rx", 4);
-    bar.setAttribute("fill", i === 0 ? "#2563eb" : "#93c5fd");
+    bar.setAttribute("fill", i === 0 ? "#00AEEF" : "#8ADCF5");
     bar.style.cursor = "pointer";
     bar.addEventListener("mousemove", (e) => showTip(e, `${d.label}: <strong>${d.pct}%</strong> dos visitantes`));
     bar.addEventListener("mouseleave", hideTip);
@@ -484,7 +484,7 @@ function drawOriginChart() {
     const val = document.createElementNS(NS, "text");
     val.setAttribute("x", padL + bw + 10); val.setAttribute("y", yy + 17);
     val.setAttribute("font-size", "12.5"); val.setAttribute("font-weight", "700");
-    val.setAttribute("fill", "#0f172a");
+    val.setAttribute("fill", "#0D1B2A");
     val.textContent = d.pct + "%";
     svg.appendChild(val);
   });
